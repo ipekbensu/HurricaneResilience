@@ -1,0 +1,180 @@
+<html>
+<head>
+    <!-- data -->
+    <script src="./lit.js"></script>
+    <!-- functions -->
+    <script src="./functions.js"></script>
+    <script src="./run.js"></script>
+</head>
+<body>
+    <h1>Lit-erally.</h1>
+
+    <h2>Top Journals.</h2>
+    <!-- <p>Some of the top journals publishing on the topic.</p> -->
+    <p id="topJournals">Edit.</p>
+
+    <h2>Top Depts.</h2>
+    <!-- <p>Some of the top depts working on the topic.</p> -->
+    <p id="topDepts">Edit.</p>
+
+    <h2>Top Keywords.</h2>
+    <!-- <p>Some of the top keywords being used.</p> -->
+    <p id="topKeywords">Edit.</p>
+
+    <h1>Over the Years.</h1>
+    <p>Select.</p>
+    <select id="dropdown" onChange="viewYears()">
+        <option>Paper Volume</option>
+        <option>Top Journals</option>
+        <option>Top Depts</option>
+        <option>Top Keywords</option>
+    </select>
+    <p id="years">Edit.</p>
+
+    <h1>Your Groundbreaking Paper on Hurricane Resilience</h1>
+
+    <h2>Team Depts.</h2>
+    <p>Check.</p>
+    <input id="CEE" type="checkbox" onChange="check()">Civil and Environmental Engineering</input><br>
+    <input id="ES" type="checkbox" onChange="check()">Environmental Studies</input><br>
+    <input id="G" type="checkbox" onChange="check()">Geography</input><br>
+
+    <h2>Submit:</h2>
+    <p id="suggestJournal">Select depts.</p>
+
+    <h2>Collaborate:</h2>
+    <p id="suggestDepts">Select depts.</p>
+
+    <h2>Don't Forget:</h2>
+    <p id="suggestKeywords">Select depts.</p>
+</body>
+<script>
+    function textify(array){
+        var res = '';
+        array.forEach(function(item, index){
+            res += item[0] + ' (' + item[1] + ')';
+            if(index<array.length - 1){
+                res += '<br>';
+            }
+        });
+        return res;
+    };
+    function textify_(array){
+        var res = '(';
+        array.forEach(function(item, index){
+            res += item[1];
+            if(index<array.length - 1){
+                res += ',';
+            }
+        });
+        res += ')';
+        return res;
+    };
+
+    document.getElementById('topJournals').innerHTML = textify(topJournals.data);
+    document.getElementById('topDepts').innerHTML = textify(topDepts.data);
+    document.getElementById('topKeywords').innerHTML = textify(topKeywords.data);
+
+    document.getElementById('years').innerHTML = textify_(years.data);
+    function viewYears(){
+        var selected = document.getElementById('dropdown');
+        var res = selected.options[selected.selectedIndex].text;
+        if(res == 'Paper Volume'){
+            document.getElementById('years').innerHTML = textify_(years.data);
+        }
+        if(res == 'Top Journals'){
+            document.getElementById('years').innerHTML = textify(yearsJournals.data);
+        }
+        if(res == 'Top Depts'){
+            document.getElementById('years').innerHTML = textify(yearsDepts.data);
+        }
+        if(res == 'Top Keywords'){
+            document.getElementById('years').innerHTML = textify(yearsKeywords.data);
+        }
+    };
+
+    var checked = null;
+    var filtered = null;
+    function check(){
+        checked = [];
+        if(document.getElementById('CEE').checked == true){
+            checked.push('Civil and Environmental Engineering');
+        }
+        if(document.getElementById('ES').checked == true){
+            checked.push('Environmental Studies');
+        }
+        if(document.getElementById('G').checked == true){
+            checked.push('Geography');
+        }
+        if(checked.length != 0){
+            filtered = lit.data;
+            filtered = filtered.filter(function(paper){
+                var res = false;
+                checked.forEach(function(item){
+                    if(paper.details.depts.includes(item)){
+                        res = true;
+                    }
+                });
+                return res;
+            });
+            var journals = {
+                metadata: [
+                    'journal', 'frequency'
+                ],
+                data: []
+            };
+            var years = {
+                metadata: [
+                    'year', 'frequency'
+                ],
+                data: []
+            };
+            var depts = {
+                metadata: [
+                    'dept', 'frequency'
+                ],
+                data: []
+            };
+            var keywords = {
+                metadata: [
+                    'keyword', 'frequency'
+                ],
+                data: []
+            };
+            journals.data = functions.detail(filtered, 'journal');
+            years.data = functions.detail(filtered, 'year');
+            depts.data = functions.detail_(filtered, 'depts');
+            keywords.data = functions.detail_(filtered, 'keywords');
+            var topJournals = {
+                metadata: [
+                    'journal', 'frequency'
+                ],
+                data: []
+            };
+            var topDepts = {
+                metadata: [
+                    'dept', 'frequency'
+                ],
+                data: []
+            };
+            var topKeywords = {
+                metadata: [
+                    'keyword', 'frequency'
+                ],
+                data: []
+            };
+            topJournals.data = functions.top(journals.data, 'journal', 1);
+            topDepts.data = functions.top(depts.data, 'dept', 3);
+            topKeywords.data = functions.top(keywords.data, 'keywords', 5);
+            document.getElementById('suggestJournal').innerHTML = textify(topJournals.data);
+            document.getElementById('suggestDepts').innerHTML = textify(topDepts.data);
+            document.getElementById('suggestKeywords').innerHTML = textify(topKeywords.data);
+        }
+        else{
+            document.getElementById('suggestJournal').innerHTML = 'Select depts.';
+            document.getElementById('suggestDepts').innerHTML = 'Select depts.';
+            document.getElementById('suggestKeywords').innerHTML = 'Select depts.';
+        }
+    };
+</script>
+</html>
