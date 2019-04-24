@@ -1,0 +1,354 @@
+<html>
+<head>
+    <!-- data -->
+    <!-- <script src="./all-geocodes-v2016.js"></script> -->
+    <script src="./DMG_PTS_Harvey_20170829.js"></script>
+    <script src="./DMG_PTS_Irma_20170914.js"></script>
+    <script src="./DMG_PTS_Nate_20171010.js"></script>
+    <script src="./HarveyWindspeeds.js"></script>
+    <script src="./HarveyDamageCount_Residential.js"></script>
+    <script src="./IrmaWindspeeds.js"></script>
+    <script src="./IrmaDamageCount_Residential.js"></script>
+    <script src="./NateWindspeeds.js"></script>
+    <script src="./NateDamageCount_Residential.js"></script>
+    <!-- functions -->
+    <script src="./functions.js"></script>
+    <script src="./run.js"></script>
+    <!-- mapping -->
+    <script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyARxs_0QWBQzZ-7tnFIkcz6Tzh5Fr1I0xg"></script>
+</head>
+<body>
+    <!-- mapping -->
+    <h1>Surge Damage v. Category</h1>
+    <h2>Map:</h2>
+    <div id="map1" style="width: 640px; height: 480px"></div>
+    <h2>Text:</h2>
+    <p>
+        Legend.<br>
+        Explanation.<br>
+        Examples.
+    </p>
+    <h2>Reference:</h2>
+    <p>
+        FEMA<br>
+        FEMA Hazus
+    </p>
+    <h1>Surge Damage v. Wind Damage</h1>
+    <h2>User selects damage type.</h2>
+    <select id="dropdown2" onchange="mark2Edit()">
+        <option value="d">Discrepancy</option>
+        <option value="s">Surge Damage</option>
+        <option value="w">Wind Damage</option>
+    </select>
+    <h2>Map:</h2>
+    <div id="map2" style="width: 640px; height: 480px"></div>
+    <h2>Text:</h2>
+    <p>
+        Legend.<br>
+        Explanation.<br>
+        Examples.
+    </p>
+    <h2>Reference:</h2>
+    <p>
+        FEMA<br>
+        FEMA Hazus
+    </p>
+</body>
+<script>
+    var map1 = [];
+    var map2 = [];
+
+    function mapsInit(){
+        var options = {
+            center: new google.maps.LatLng(29.0148888,-88.2511309),
+            zoom: 5.55,
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
+        map1 = new google.maps.Map(document.getElementById('map1'), options);
+        map2 = new google.maps.Map(document.getElementById('map2'), options);
+    };
+
+    var mark1 = [];
+    var mark2 = [];
+
+    function mark1Init(){
+        coord.data.forEach(function(item){
+            // ~~~~~~~~~~~~~~~~~~~~
+            // note to self:
+            // edit colors
+            // ~~~~~~~~~~~~~~~~~~~~
+            var color = '#FF0000'; // red if 'NA'
+            if(item[1][2] == 'Category I'){
+                color = '#FFA500'; // orange if 'Category I'
+            }
+            if(item[1][2] == 'Category II'){
+                color = '#FFFF00'; // yellow if 'Category II'
+            }
+            if(item[1][2] == 'Category III'){
+                color = '#008000'; // green if 'Category III'
+            }
+            if(item[1][2] == 'Category IV'){
+                color = '#0000FF'; // blue if 'Category IV'
+            }
+            if(item[1][2] == 'Category V'){
+                color = '#800080'; // purple if 'Category V'
+            }
+            var county = item[0][1];
+            // corrections
+            if(item[0][1] == 'FortBend'){
+                county = 'Fort Bend';
+            }
+            if(item[0][1] == 'SanPatricio'){
+                county = 'San Patricio';
+            }
+            if(item[0][1] == 'MiamiDade'){
+                county = 'Miami-Dade';
+            }
+            if(item[0][1] == 'StJohns'){
+                county = 'St. Johns'
+            }
+            var state = 'NA';
+            if(item[0][0] == 'Texas'){
+                state = 'TX';
+            }
+            if(item[0][0] == 'SouthCarolina'){
+                state = 'SC';
+            }
+            if(item[0][0] == 'Georgia'){
+                state = 'GA';
+            }
+            if(item[0][0] == 'Florida'){
+                state = 'FL';
+            }
+            if(item[0][0] == 'Alabama'){
+                state = 'AL';
+            }
+            if(item[0][0] == 'Mississippi'){
+                state = 'MS';
+            }
+            var marker = new google.maps.Marker({
+                title: county + ', ' + state + '\n' + 'Hurricane ' + item[1][0] + '\n' + item[1][2] + '\n' + 'Affected, per mil: ' + item[2][4],
+                map: map1,
+                position: new google.maps.LatLng(item[0][3], item[0][4]),
+                icon: {
+                    // ~~~~~~~~~~~~~~~~~~~~
+                    // note to self:
+                    // edit icon
+                    // ~~~~~~~~~~~~~~~~~~~~
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 2 + item[2][4]/100,
+                    strokeColor: color,
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: color,
+                    fillOpacity: 0.35
+                }
+            });
+            mark1.push(marker);
+        });
+    };
+
+    function mark2Init(){
+        // default
+        coord.data.forEach(function(item){
+            var info = 'Discrepancy, per mil: ' + item[4][4];
+            var path = null;
+            var scale = 1 + Math.abs(item[4][4])/200;
+            var color = null;
+            // ~~~~~~~~~~~~~~~~~~~~
+            // note to self:
+            // edit colors
+            // ~~~~~~~~~~~~~~~~~~~~
+            if(item[4][4]<0){
+                // FEMA (surge) greater
+                path = google.maps.SymbolPath.FORWARD_OPEN_ARROW;
+                // color = '#008000';
+            }
+            else{
+                // Hazus (wind) greater
+                path = google.maps.SymbolPath.BACKWARD_OPEN_ARROW;
+                // color = '#FF0000';
+            }
+            var county = item[0][1];
+            // corrections
+            if(item[0][1] == 'FortBend'){
+                county = 'Fort Bend';
+            }
+            if(item[0][1] == 'SanPatricio'){
+                county = 'San Patricio';
+            }
+            if(item[0][1] == 'MiamiDade'){
+                county = 'Miami-Dade';
+            }
+            if(item[0][1] == 'StJohns'){
+                county = 'St. Johns'
+            }
+            var state = null;
+            if(item[0][0] == 'Texas'){
+                state = 'TX';
+            }
+            if(item[0][0] == 'SouthCarolina'){
+                state = 'SC';
+            }
+            if(item[0][0] == 'Georgia'){
+                state = 'GA';
+            }
+            if(item[0][0] == 'Florida'){
+                state = 'FL';
+            }
+            if(item[0][0] == 'Alabama'){
+                state = 'AL';
+            }
+            if(item[0][0] == 'Mississippi'){
+                state = 'MS';
+            }
+            var marker = new google.maps.Marker({
+                title: county + ', ' + state + '\n' + 'Hurricane ' + item[1][0] + '\n' + item[1][2] + '\n' + info,
+                map: map2,
+                position: new google.maps.LatLng(item[0][3], item[0][4]),
+                icon: {
+                    // ~~~~~~~~~~~~~~~~~~~~
+                    // note to self:
+                    // edit icon
+                    // ~~~~~~~~~~~~~~~~~~~~
+                    path: path,
+                    scale: scale,
+                    strokeColor: color,
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: color,
+                    fillOpacity: 0.35
+                }
+            });
+            mark2.push(marker);
+        });
+    };
+
+    function mark2Edit(){
+        // dropdown options
+        mark2Clear();
+        var selected = document.getElementById('dropdown2');
+        var res = selected.options[selected.selectedIndex].text;
+        coord.data.forEach(function(item){
+            var info = null;
+            var path = google.maps.SymbolPath.CIRCLE;
+            var scale = null;
+            var color = null;
+            // ~~~~~~~~~~~~~~~~~~~~
+            // note to self:
+            // edit colors
+            // ~~~~~~~~~~~~~~~~~~~~
+            color = '#FF0000'; // red if 'NA'
+            if(item[1][2] == 'Category I'){
+                color = '#FFA500'; // orange if 'Category I'
+            }
+            if(item[1][2] == 'Category II'){
+                color = '#FFFF00'; // yellow if 'Category II'
+            }
+            if(item[1][2] == 'Category III'){
+                color = '#008000'; // green if 'Category III'
+            }
+            if(item[1][2] == 'Category IV'){
+                color = '#0000FF'; // blue if 'Category IV'
+            }
+            if(item[1][2] == 'Category V'){
+                color = '#800080'; // purple if 'Category V'
+            }
+            if(res == 'Discrepancy'){
+                info = 'Discrepancy, per mil: ' + item[4][4];
+                scale = 1 + Math.abs(item[4][4])/200;
+                // ~~~~~~~~~~~~~~~~~~~~
+                // note to self:
+                // edit colors
+                // ~~~~~~~~~~~~~~~~~~~~
+                if(item[4][4]<0){
+                    // FEMA (surge) greater
+                    path = google.maps.SymbolPath.FORWARD_OPEN_ARROW;
+                    // color = '#008000';
+                    color = null;
+                }
+                else{
+                    // Hazus (wind) greater
+                    path = google.maps.SymbolPath.BACKWARD_OPEN_ARROW;
+                    // color = '#FF0000';
+                    color = null;
+                }
+            }
+            if(res == 'Surge Damage'){
+                info = 'Affected, per mil: ' + item[2][4];
+                scale = 2 + item[2][4]/100;
+            }
+            if(res == 'Wind Damage'){
+                info = 'Affected, per mil: ' + item[3][4];
+                scale = 2 + item[3][4]/100;
+            }
+            var county = item[0][1];
+            // corrections
+            if(item[0][1] == 'FortBend'){
+                county = 'Fort Bend';
+            }
+            if(item[0][1] == 'SanPatricio'){
+                county = 'San Patricio';
+            }
+            if(item[0][1] == 'MiamiDade'){
+                county = 'Miami-Dade';
+            }
+            if(item[0][1] == 'StJohns'){
+                county = 'St. Johns'
+            }
+            var state = null;
+            if(item[0][0] == 'Texas'){
+                state = 'TX';
+            }
+            if(item[0][0] == 'SouthCarolina'){
+                state = 'SC';
+            }
+            if(item[0][0] == 'Georgia'){
+                state = 'GA';
+            }
+            if(item[0][0] == 'Florida'){
+                state = 'FL';
+            }
+            if(item[0][0] == 'Alabama'){
+                state = 'AL';
+            }
+            if(item[0][0] == 'Mississippi'){
+                state = 'MS';
+            }
+            var marker = new google.maps.Marker({
+                title: item[0][1] + ', ' + state + '\n' + 'Hurricane ' + item[1][0] + '\n' + item[1][2] + '\n' + info,
+                map: map2,
+                position: new google.maps.LatLng(item[0][3], item[0][4]),
+                icon: {
+                    // ~~~~~~~~~~~~~~~~~~~~
+                    // note to self:
+                    // edit icon
+                    // ~~~~~~~~~~~~~~~~~~~~
+                    path: path,
+                    scale: scale,
+                    strokeColor: color,
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: color,
+                    fillOpacity: 0.35
+                }
+            });
+            mark2.push(marker);
+        });
+    };
+
+    function mark2Clear(){
+        for(var i=0; i<mark2.length; i++){
+            mark2[i].setMap(null);
+        }
+        mark2 = [];
+    };
+    
+    function viewMap(){
+        google.maps.event.addDomListener(window, 'load', mapsInit);
+        google.maps.event.addDomListener(window, 'load', mark1Init);
+        google.maps.event.addDomListener(window, 'load', mark2Init);
+    };
+    viewMap();
+</script>
+</html>
