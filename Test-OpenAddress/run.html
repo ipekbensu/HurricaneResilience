@@ -1,0 +1,379 @@
+<html>
+<head>
+    <!-- maps disabled for debugging -->
+    <script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyARxs_0QWBQzZ-7tnFIkcz6Tzh5Fr1I0xg"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARxs_0QWBQzZ-7tnFIkcz6Tzh5Fr1I0xg&libraries=visualization"></script>
+    <script src="./functions.js"></script>
+    <script src="./pinellas.js"></script>
+    <script src="./redfin_2019-04-05-08-28-58.js"></script>
+    <script src="./run.js"></script>
+</head>
+<body>
+    <h2>Map:</h2>
+    <div id="map" style="width: 640px; height: 480px"></div>
+    <h2>Heatmap:</h2>
+    <div id="heatmap" style="width: 640px; height: 480px"></div>
+</body>
+<script>
+    // random 1% of buildings
+    var onePer = [];
+    for(var i=0; i<Math.floor(0.01*oadata.data.length); i++){ // OpenAddress data
+        var index = Math.floor(Math.random()*oadata.data.length);
+        var point = {
+            LAT: oadata.data[index].LAT,
+            LON: oadata.data[index].LON
+        };
+        onePer.push(point);
+    };
+
+    // all of listings
+    var listed = rfedit.data.map(function(item){ // Redfin data
+        var point = {
+            LAT: item.LAT,
+            LON: item.LON
+        };
+        return point;
+    });
+
+    // matched listings
+    var matched = rfedit.data.filter(function(item){ // Redfin data
+        if(item.rfMATCH == 'YES'){
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+    matched = matched.map(function(item){
+        var point = {
+            LAT: item.LAT,
+            LON: item.LON
+        };
+        return point;
+    });
+
+    var map = [];
+    var markers = [];
+
+    function mapInit(){
+        // Initiate map for Pinellas County, FL
+        var options = {
+            title: 'Pinellas County, FL',
+            center: new google.maps.LatLng(27.9291464, -82.6987243),
+            zoom: 10,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map'), options);
+        google.maps.event.addDomListener(window, 'load', mapInit);
+    };
+
+    function onePerInit(){
+        // Initiate markers for random 1% of buildings
+        onePer.forEach(function(point){
+            var marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(point.LAT, point.LON),
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 1
+                }
+            });
+            markers.push(marker);
+        });
+        google.maps.event.addDomListener(window, 'load', onePerInit);
+    };
+
+    function listedInit(){
+        // Initiate markers for all of listings
+        listed.forEach(function(point){
+            var marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(point.LAT, point.LON),
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 1
+                }
+            });
+            markers.push(marker);
+        });
+        google.maps.event.addDomListener(window, 'load', listedInit);
+    };
+
+    function matchedInit(){
+        // Initiate markers for matched listings
+        matched.forEach(function(point){
+            var marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(point.LAT, point.LON),
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 2,
+                    strokeColor: '#0000FF'
+                }
+            });
+            markers.push(marker);
+        });
+        google.maps.event.addDomListener(window, 'load', matchedInit);
+    };
+
+    function viewMap(){
+        mapInit();
+        // edit: why are markers double-counted?
+        // onePerInit(); // black dots
+        // listedInit(); // black dots
+        // matchedInit(); // big blue dots
+        rfdistrTypesInit();
+        // oadistrTypesInit();
+    };
+    viewMap();
+
+    var heatmap = [];
+    var points = [];
+
+    // ---------------------------------------------
+    // taken from 1.001 sample code
+    var MY_MAPTYPE_ID = 'custom_style';
+    // ---------------------------------------------
+
+    // ---------------------------------------------
+    // taken from 1.001 sample code
+    var featureOpts = [
+        {
+        stylers: [
+            {color: '#333333'}
+        ]
+        },
+        {
+        elementType: 'labels',
+        stylers: [
+            {visibility: 'off'}
+        ]
+        },
+        {
+        featureType: 'road.local',
+        stylers: [
+            {visibility: 'off'}
+        ]
+        },
+        {
+        featureType: 'road.arterial',
+        stylers: [
+            {visibility: 'off'}
+        ]
+        },
+        {
+        featureType: 'water',
+        stylers: [
+            {color: '#000000'}
+        ]
+        }
+    ];
+    // ---------------------------------------------
+
+    function heatmapInit(){
+        // Initiate map for Pinellas County, FL
+        var options = {
+            title: 'Pinellas County, FL',
+            center: new google.maps.LatLng(27.9291464, -82.6987243),
+            zoom: 10,
+            // ---------------------------------------------
+            // taken from 1.001 sample code
+            mapTypeControlOptions: {
+                mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
+            },
+            mapTypeId: MY_MAPTYPE_ID
+            // ---------------------------------------------
+        };
+        heatmap = new google.maps.Map(document.getElementById('heatmap'), options);
+        // ---------------------------------------------
+        // taken from 1.001 sample code
+        var styledOptions = {
+            name: 'Heatmap'
+        };
+        var customMapType = new google.maps.StyledMapType(featureOpts, styledOptions);
+        heatmap.mapTypes.set(MY_MAPTYPE_ID, customMapType);
+        // ---------------------------------------------
+        oadata.data.forEach(function(item){
+            points.push(new google.maps.LatLng(item.LAT, item.LON));
+        });
+        heatmap = new google.maps.visualization.HeatmapLayer({
+            data: points,
+            map: heatmap
+        });
+        google.maps.event.addDomListener(window, 'load', heatmapInit);
+    };
+
+    function viewHeatmap(){
+        heatmapInit();
+        // edit: why are markers double-counted?
+    };
+    // viewHeatmap();
+
+    // 'orange_MarkerS.png': Single-family
+    // 'blue_MarkerT.png': Townhouse
+    // 'red_MarkerC.png': Condo
+    // 'brown_MarkerM.png': Mobile/Manufactured
+    // 'darkgreen_MarkerM.png': Multi-family (2-4 units)
+    // 'green_MarkerM.png': Multi-family (5+ units)
+
+    function rfdistrTypesInit(){
+        // Initiate markers for random 1% of buildings
+        rfedit.data.forEach(function(point){
+            if(point.rfPROPERTY_TYPE == 'SINGLE FAMILY RESIDENTIAL'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'orange_MarkerS.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#FFA500'
+                    }
+                });
+            };
+            if(point.rfPROPERTY_TYPE == 'TOWNHOUSE'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'blue_MarkerT.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#0000FF'
+                    }
+                });
+            };
+            if(point.rfPROPERTY_TYPE == 'CONDO/CO-OP'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'red_MarkerC.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#FF0000'
+                    }
+                });
+            };
+            if(point.rfPROPERTY_TYPE == 'MOBILE/MANUFACTURED HOME'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'brown_MarkerM.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#A52A2A'
+                    }
+                });
+            };
+            if(point.rfPROPERTY_TYPE == 'MULTI-FAMILY (2-4 UNIT)'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'darkgreen_MarkerM.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#006400'
+                    }
+                });
+            };
+            if(point.rfPROPERTY_TYPE == 'MULTI-FAMILY (5+ UNIT)'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'green_MarkerM.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#008000'
+                    }
+                });
+            };
+            markers.push(marker);
+        });
+        google.maps.event.addDomListener(window, 'load', rfdistrTypesInit);
+    };
+
+    function oadistrTypesInit(){
+        // Initiate markers for random 1% of buildings
+        distrTypes.forEach(function(point){
+            if(point.rfPROPERTY_TYPE == 'SINGLE FAMILY RESIDENTIAL'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'orange_MarkerS.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#FFA500'
+                    }
+                });
+            };
+            if(point.rfPROPERTY_TYPE == 'TOWNHOUSE'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'blue_MarkerT.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#0000FF'
+                    }
+                });
+            };
+            if(point.rfPROPERTY_TYPE == 'CONDO/CO-OP'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'red_MarkerC.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#FF0000'
+                    }
+                });
+            };
+            if(point.rfPROPERTY_TYPE == 'MOBILE/MANUFACTURED HOME'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'brown_MarkerM.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#A52A2A'
+                    }
+                });
+            };
+            if(point.rfPROPERTY_TYPE == 'MULTI-FAMILY (2-4 UNIT)'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'darkgreen_MarkerM.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#006400'
+                    }
+                });
+            };
+            if(point.rfPROPERTY_TYPE == 'MULTI-FAMILY (5+ UNIT)'){
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(point.LAT, point.LON),
+                    // icon: 'green_MarkerM.png'
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 1,
+                        strokeColor: '#008000'
+                    }
+                });
+            };
+            markers.push(marker);
+        });
+        google.maps.event.addDomListener(window, 'load', oadistrTypesInit);
+    };
+</script>
+</html>
