@@ -1,5 +1,21 @@
 <html>
 <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .column{
+            float: left;
+            width: 50%;
+            padding: 0px;
+        }
+        .row:after{
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
     <!-- data -->
     <!-- ~~~~~~~~~~~~~~~~~~~~
     note to self:
@@ -16,31 +32,43 @@
 <body>
     <!-- mapping -->
     <h1>Loss Amplification</h1>
-    <h2>User selects SED factor.</h2>
-    <select id="dropdown1" onchange="markersEdit()">
-        <option value="a">Age-----------------------------</option>
-        <option value="e">Ethnicity/Race</option>
-        <option value="f">Family Structure</option>
-        <option value="g">Gender</option>
-        <option value="s">Socioeconomic Status</option>
-        <option value="b">Built Environment</option>
-    </select>
-    <h2>User selects morbidity.</h2>
-    <select id="dropdown2" onchange="markersEdit()">
-        <option value="i">Injuries------------------------</opton>
-        <option value="f">Fatalities</option>
-        <option value="p">Cases of PTSD</option>
-    </select>
-    <h1>Map:</h1>
-    <p>Displays 10-%ile loss amplifications.</p>
-    <div id="map" style="width: 640px; height: 480px"></div>
-    <h1>Text:</h1>
-    <p>Explains effect of chosen SED factor on chosen morbidity.</p>
-    <h1>Reference:</h1>
-    <p>
-        Sutley, 2016<br>
-        US Census Bureau
-    </p>
+    <!-- <div class="row">
+        <div class="column"> -->
+            <h2>User selects SED factor.</h2>
+            <select id="dropdown1" onchange="markersEdit()">
+                <option value="a">Age-----------------------------</option>
+                <option value="e">Ethnicity/Race</option>
+                <option value="f">Family Structure</option>
+                <option value="g">Gender</option>
+                <option value="s">Socioeconomic Status</option>
+                <option value="b">Built Environment</option>
+            </select>
+        <!-- </div>
+        <div class="column"> -->
+            <h2>User selects morbidity.</h2>
+            <select id="dropdown2" onchange="markersEdit()">
+                <option value="i">Injuries------------------------</opton>
+                <option value="f">Fatalities</option>
+                <option value="p">Cases of PTSD</option>
+            </select>
+        <!-- </div>
+    </div> -->
+    <div class="row">
+        <div class="column">
+            <h1>Map:</h1>
+            <p>Displays 10-%ile loss amplifications.</p>
+            <div id="map" style="width: 600px; height: 600px"></div>
+        </div>
+        <div class="column">
+            <h1>Text:</h1>
+            <p>Explains effect of chosen SED factor on chosen morbidity.</p>
+            <h1>Reference:</h1>
+            <p>
+                Sutley, 2016<br>
+                US Census Bureau
+            </p>
+        </div>
+    </div>
 </body>
 <script>
     var map = [];
