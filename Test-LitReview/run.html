@@ -1,5 +1,21 @@
 <html>
 <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .column{
+            float: left;
+            width: 33.33%;
+            padding: 10px;
+        }
+        .row:after{
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
     <!-- data -->
     <script src="./lit.js"></script>
     <!-- functions -->
@@ -9,18 +25,25 @@
 <body>
     <h1>Lit-erally.</h1>
 
-    <h2>Top 10 Journals.</h2>
-    <p id="topJournals">Edit.</p>
-
-    <h2>Top 10 Depts.</h2>
-    <!-- add onto -->
-    <p id="aveDepts">Ave # of depts on papers: </p>
-    <p id="topDepts">Edit.</p>
-
-    <h2>Top 10 Keywords.</h2>
-    <!-- add onto -->
-    <p id="aveKeywords">Ave # of keywords on papers: </p>
-    <p id="topKeywords">Edit.</p>
+    <!-- general info -->
+    <div class="row">
+        <div class="column">
+            <h2>Top 10 Journals.</h2>
+            <p id="topJournals">Edit.</p>
+        </div>
+        <div class="column">
+            <h2>Top 10 Depts.</h2>
+            <!-- add onto -->
+            <p id="aveDepts">Ave # of depts on papers: </p>
+            <p id="topDepts">Edit.</p>
+        </div>
+        <div class="column">
+            <h2>Top 10 Keywords.</h2>
+            <!-- add onto -->
+            <p id="aveKeywords">Ave # of keywords on papers: </p>
+            <p id="topKeywords">Edit.</p>
+        </div>
+    </div>
 
     <h1>Over the Years.</h1>
     <p>Select.</p>
@@ -36,29 +59,45 @@
 
     <h2>Team Depts.</h2>
     <p>Check.</p>
-    <input id="CEE" type="checkbox" onChange="check()">Civil and Environmental Engineering</input><br>
-    <input id="ISE" type="checkbox" onChange="check()">Industrial and Systems Engineering</input><br>
-    <input id="ES" type="checkbox" onChange="check()">Environmental Studies</input><br>
-    <input id="G" type="checkbox" onChange="check()">Geography</input><br>
-    <input id="ECS" type="checkbox" onChange="check()">Electrical and Computer Engineering</input><br>
-    <input id="UPL" type="checkbox" onChange="check()">Urban Planning and Landscape</input><br>
-    <input id="A" type="checkbox" onChange="check()">Architecture</input><br>
-    <input id="PH" type="checkbox" onChange="check()">Public Health</input><br>
-    <input id="EAPS" type="checkbox" onChange="check()">Earth, Atmospheric and Planetary Sciences</input><br>
-    <input id="EM" type="checkbox" onChange="check()">Engineering Management</input><br>
 
-    <h2>Submit:</h2>
-    <p id="suggestJournal">Select depts.</p>
+    <!-- select depts -->
+    <!-- <div class="row">
+        <div class="column"> -->
+            <input id="CEE" type="checkbox" onChange="check()">Civil and Environmental Engineering</input><br>
+            <input id="ISE" type="checkbox" onChange="check()">Industrial and Systems Engineering</input><br>
+            <input id="ES" type="checkbox" onChange="check()">Environmental Studies</input><br>
+            <input id="G" type="checkbox" onChange="check()">Geography</input><br>
+            <input id="ECS" type="checkbox" onChange="check()">Electrical and Computer Engineering</input><br>
+        <!-- </div>
+        <div class="column"> -->
+            <input id="UPL" type="checkbox" onChange="check()">Urban Planning and Landscape</input><br>
+            <input id="A" type="checkbox" onChange="check()">Architecture</input><br>
+            <input id="PH" type="checkbox" onChange="check()">Public Health</input><br>
+            <input id="EAPS" type="checkbox" onChange="check()">Earth, Atmospheric and Planetary Sciences</input><br>
+            <input id="EM" type="checkbox" onChange="check()">Engineering Management</input><br>
+        <!-- </div>
+    </div> -->
 
-    <h2>Collaborate:</h2>
-    <!-- add onto -->
-    <p id="suggestAveDepts">Ave # of depts on papers: </p>
-    <p id="suggestDepts">Select depts.</p>
+    <!-- depts info -->
+    <div class="row">
+        <div class="column">
+            <h2>Submit:</h2>
+            <p id="suggestJournal">Select depts.</p>
+        </div>
+        <div class="column">
+            <h2>Collaborate:</h2>
+            <!-- add onto -->
+            <p id="suggestAveDepts">Ave # of depts on papers: </p>
+            <p id="suggestDepts">Select depts.</p>
+        </div>
+        <div class="column">
+            <h2>Don't Forget:</h2>
+            <!-- add onto -->
+            <p id="suggestAveKeywords">Ave # of keywords on papers: </p>
+            <p id="suggestKeywords">Select depts.</p>
+        </div>
+    </div>
 
-    <h2>Don't Forget:</h2>
-    <!-- add onto -->
-    <p id="suggestAveKeywords">Ave # of keywords on papers: </p>
-    <p id="suggestKeywords">Select depts.</p>
 </body>
 <script>
     function textify(array){
