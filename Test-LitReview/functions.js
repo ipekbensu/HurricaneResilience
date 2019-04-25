@@ -156,5 +156,15 @@ functions.overYears_ = function(top, lit, detail){
     return data;
 };
 
+functions.ave = function(lit, detail){
+    var ave = 0;
+    lit.forEach(function(paper){
+        ave += paper.details[detail].length;
+    });
+    ave /= lit.length;
+    ave = Math.ceil(ave);
+    return ave;
+};
+
 // debugging in node
 // module.exports = functions;
