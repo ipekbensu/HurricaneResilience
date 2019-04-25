@@ -40,7 +40,7 @@ keywords.data = functions.detail_(lit.data, 'keywords');
 // console.log(journals);
 // console.log(years);
 // console.log(depts);
-console.log(keywords);
+// console.log(keywords);
 
 var topJournals = {
     metadata: [
