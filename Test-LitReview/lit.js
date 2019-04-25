@@ -155,7 +155,7 @@ var lit = {
             ],
             objective: [
                 'aid decision making',
-                'highlight social infrastructure'
+                'highlight importance of social infrastructure'
             ]
         },
         methods: [
@@ -577,7 +577,7 @@ var lit = {
         details: {
             journal: 'Natural Hazards',
             year: 2012,
-            title: "Bronfenbrenner's Bioecological Theory for Modelling Community Resilience to Natural Disasters",
+            title: 'Bronfenbrenners Bioecological Theory for Modelling Community Resilience to Natural Disasters',
             authors: [
                 'Boon',
                 'Cottrell',
@@ -867,7 +867,7 @@ var lit = {
             system: null,
             scale: 'County',
             case: [
-                'Los Angeles'
+                'Los Angeles County'
             ],
             motivation: [
                 'disaster preparedness',
@@ -1353,7 +1353,7 @@ var lit = {
                 'post-2015 Sustainable Development Goals'
             ],
             objective: [
-                'highlight womens active participation'
+                'highlight importance of womens active participation'
             ]
         },
         methods: [],
@@ -2898,7 +2898,7 @@ var lit = {
             ]
         },
         topic: {
-            hazard: 'Wind',
+            hazard: 'Wind Events',
             system: 'Buildings',
             scale: 'Community',
             case: [],
@@ -2958,6 +2958,1390 @@ var lit = {
         ],
         results: [
             'hazard resistance and hazard mitigation do not figure prominently in sustainable assessment frameworks'
+        ]
+    },{
+        details: {
+            journal: 'ASCE',
+            year: 2015,
+            title: 'Research Needs for Developing a Risk-Informed Methodology for Community Resilience',
+            authors: [
+                'McAllister'
+            ],
+            depts: [],
+            keywords: [
+                'community resilience',
+                'risk-informed methodology',
+                'essential facilities',
+                'buildings',
+                'infrastructure systems',
+                'standards',
+                'metrics',
+                'structural safety and reliability'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [],
+            motivation: [
+                'multiple hazards',
+                'system performance levels',
+                'recovery of functionality',
+                'dependencies between systems'
+            ],
+            objective: [
+                'call for quantitative, risk-informed tools',
+                'call for quantitative, risk-informed metrics'
+            ]
+        },
+        methods: [],
+        results: [
+            'resilience: (1) physical security, (2) business continuity, (3) emergency planning, (4) hazard mitigation and (5) built environments ability to resist and rapidly recover from disruptive events',
+            'research needs: (1) risk-informed tools to support resilience planning, (2) performance goals of functionality and recovery levels, (3) multiple resilience levels and (4) standardized tools and metrics'
+        ]
+    },{
+        details: {
+            journal: 'ASCE',
+            year: 2015,
+            title: 'Efficient Resilience Assessment Framework for Electric Power Systems Affected by Hurricane Events',
+            authors: [
+                'Mensah',
+                'Duenas-Osorio'
+            ],
+            depts: [
+                'Civil and Environmental Engineering'
+            ],
+            keywords: [
+                'resilience',
+                'restoration',
+                'performance assessment',
+                'power outages',
+                'Bayesian networks',
+                'electric power systems',
+                'hurricanes',
+                'safety and reliability'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: 'Electric Grids',
+            scale: null,
+            case: [
+                'Hurricane Ike',
+                'Texas'
+            ],
+            motivation: [
+                'public health',
+                'economy',
+                'security',
+                'well-being'
+            ],
+            objective: [
+                'provide computationally efficient algorithms',
+                'span hazards',
+                'span structural and system responses',
+                'span restoration processes'
+            ]
+        },
+        methods: [
+            'Bayesian networks',
+            'what-if scenarios'
+        ],
+        results: []
+    },{
+        details: {
+            journal: 'Risk Analysis',
+            year: 2011,
+            title: 'Comparison and Validation of Statistical Methods for Predicting Power Outage Durations in the Event of Hurricanes',
+            authors: [
+                'Nateghi',
+                'Guikema',
+                'Quiring'
+            ],
+            depts: [],
+            keywords: [
+                'data mining',
+                'power system restoration',
+                'survival analysis'
+            ]
+        },
+        topic: {
+            hazard: 'Hurricanes',
+            system: 'Electric Grids',
+            scale: null,
+            case: [
+                'Hurricane Ivan'
+            ],
+            motivation: [
+                'restoration efforts',
+                'response planning',
+                'coordination'
+            ],
+            objective: [
+                'examine methods',
+                'compare statistical models'
+            ]
+        },
+        methods: [
+            'regression models',
+            'Cox proportional hazard models',
+            'data mining techniques',
+            'regression trees',
+            'Bayesian additive regression trees',
+            'multivariate additive regression splines'
+        ],
+        results: [
+            'BART yields the best accuracy for predicting outage durations'
+        ]
+    },{
+        details: {
+            journal: 'IEEE',
+            year: 2017,
+            title: 'Multi-Dimensional Infrastructure Resilience Modeling: An Application to Hurricane-Prone Electric Power Distribution Systems',
+            authors: [
+                'Nateghi'
+            ],
+            depts: [
+                'Industrial and Systems Engineering'
+            ],
+            keywords: [
+                'infrastructure resilience analysis',
+                'hurricane-induced outages',
+                'multi-dimensional resilience modeling',
+                'multivariate resilience'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [],
+            motivation: [
+                'multivariate nature of resilience',
+                'investment'
+            ],
+            objective: [
+                'characterize multivariate inoperability',
+                'aid decision making'
+            ]
+        },
+        methods: [
+            'statistical machine learning',
+            'variable influence heatmap',
+            'partial dependence plots'
+        ],
+        results: [
+            'nonlinear functions of: (1) systems topology, (2) hurricane hazard characteristics and (3) service areas climate and topography',
+            'results establish: (1) tree-trimming frequency, (2) hurricane intensity, (3) land-cover types and (4) soil moisture'
+        ]
+    },{
+        details: {
+            journal: 'Ecology and Society',
+            year: 2009,
+            title: 'Rethinking Social Contracts: Building Resilience in a Changing Climate',
+            authors: [
+                'OBrien',
+                'Hayward',
+                'Berkes'
+            ],
+            depts: [
+                'Sociology',
+                'Political Science'
+            ],
+            keywords: [
+                'adaptation',
+                'climate change',
+                'New Zealand',
+                'Northern Canada',
+                'Norway',
+                'resilience',
+                'social contracts'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [],
+            motivation: [
+                'social contracts',
+                'reciprocal rights',
+                'obligation',
+                'responsibilities between states and citizens',
+                'climate change'
+            ],
+            objective: [
+                'emphasize dynamics',
+                'emphasize links',
+                'emphasize complexity of couple social-ecological systems'
+            ]
+        },
+        methods: [
+            'resilience thinking',
+            'social contract theory'
+        ],
+        results: [
+            'resilience thinking provides insight on: characteristics of new social contracts',
+            'social conract theory provides insight on: (1) resilience and (2) human security in a warming world'
+        ]
+    },{
+        details: {
+            journal: 'Journal of Homeland Security and Emergency Management',
+            year: 2012,
+            title: 'Strategic Uses of Lessons for Building Collaborative Emergency Management System: Comparative Analysis of Hurricane Katrina and Hurricane Gustav Response Systems',
+            authors: [
+                'Oh'
+            ],
+            depts: [],
+            keywords: [
+                'emergency response systems',
+                'strategic uses of lessons',
+                'Hurricane Katrina',
+                'Hurricane Gustav',
+                'inter-organizational collaboration',
+                'common knowledge base'
+            ]
+        },
+        topic: {
+            hazard: 'Hurricanes',
+            system: null,
+            scale: null,
+            case: [
+                'Hurricane Katrina',
+                'Hurricane Gustav'
+            ],
+            motivation: [
+                'organizational learning'
+            ],
+            objective: [
+                'highlight importance of organizational culture'
+            ]
+        },
+        methods: [
+            'semi-structured interviews'
+        ],
+        results: [
+            'organizations need to collaborate',
+            'joint operations need to be coordinated',
+            'effective communication contributes to: (1) timely, accurate and valid information and (2) common knowledge base',
+            'organizational capacity increases through: (1) training and (2) retention programs'
+        ]
+    },{
+        details: {
+            journal: 'Structural Safety',
+            year: 2011,
+            title: 'A Three-Stage Resilience Analysis Framework for Urban Infrastructure Systems',
+            authors: [
+                'Ouyang',
+                'Duenas-Osorio',
+                'Min'
+            ],
+            depts: [
+                'Civil and Environmental Engineering',
+                'Control Science'
+            ],
+            keywords: [
+                'infrastructure systems',
+                'multiple hazards',
+                'expected annual resilience',
+                'power systems'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: 'Electric Grids',
+            scale: 'County',
+            case: [
+                'Harris County',
+                'Texas'
+            ],
+            motivation: [],
+            objective: [
+                'propose framework for infrastructure resilience',
+                'aid decision making'
+            ]
+        },
+        methods: [
+            'expected annual resilience metric',
+            'power grid model',
+            'hypothetical resilience-improved models'
+        ],
+        results: [
+            'random hazards more frequent than hurricane hazards',
+            'limit resources: recovery sequences play a crucial role',
+            'sufficient resources: (1) deploying redundancy, (2) hardening critical components and (3) ensuring rapid recovery are all effective',
+            'small deviations cost millions of dollars'
+        ]
+    },{
+        details: {
+            journal: 'Chaos',
+            year: 2012,
+            title: 'Time-Dependent Resilience Assessment and Improvement of Urban Infrastructure Systems',
+            authors: [
+                'Ouyang',
+                'Duenas-Osorio'
+            ],
+            depts: [
+                'Civil and Environmental Engineering',
+                'Control Science'
+            ],
+            keywords: []
+        },
+        topic: {
+            hazard: null,
+            system: 'Electric Grid',
+            scale: null,
+            case: [
+                'Harris County',
+                'Texas'
+            ],
+            motivation: [],
+            objective: [
+                'consider future evolving processes',
+                'simulate time-dependence',
+                'simulate resilience-inspired strategies'
+            ]
+        },
+        methods: [],
+        results: [
+            'forms of resilience: (1) previous, (2) current potential and (3) future potential',
+            'resilience-inspired strategies: (1) enhancement of situational awareness, (2) management of consumer demand and (3) integration of distributed generators',
+            'resilience nonlinear'
+        ]
+    },{
+        details: {
+            journal: 'Structural Safety',
+            year: 2014,
+            title: 'Multi-Dimensional Hurricane Resilience Assessment of Electric Power Systems',
+            authors: [
+                'Ouyang',
+                'Duenas-Osorio'
+            ],
+            depts: [
+                'Civil and Environmental Engineering'
+            ],
+            keywords: [
+                'electric power systems',
+                'resilience',
+                'hurricane hazards',
+                'component fragility',
+                'robustness',
+                'restoration',
+                'networks'
+            ]
+        },
+        topic: {
+            hazard: 'Hurricanes',
+            system: null,
+            scale: null,
+            case: [
+                'Hurricane Ike',
+                'Harris County',
+                'Texas'
+            ],
+            motivation: [
+                'prosperity',
+                'national security',
+                'public health',
+                'public safety',
+                'cascading failures'
+            ],
+            objective: [
+                'quantify hurricane resilience',
+                'estimate economic losses'
+            ]
+        },
+        methods: [
+            'hurricane hazard model',
+            'component fragility models',
+            'power system performance model',
+            'system restoration model',
+            'real outage data',
+            'real restoration data'
+        ],
+        results: [
+            'dimensions of resilience: (1) technical, (2) organizational and (3) social',
+            'highest value: organizational',
+            'lowest value: social',
+            'small deviations cost millions of dollars'
+        ]  
+    },{
+        details: {
+            journal: 'Reliability Engineering and System Safety',
+            year: 2015,
+            title: 'Resilience Assessment of Interdependent Infrastructure Systems: With a Focus on Joint Restoration Modeling and Analysis',
+            authors: [
+                'Ouyang',
+                'Wang'
+            ],
+            depts: [
+                'Industrial and Systems Engineering',
+                'Civil and Environmental Engineering'
+            ],
+            keywords: [
+                'infrastructure systems',
+                'interdependencies',
+                'resilience assessment',
+                'cascading failures',
+                'restoration',
+                'genetic algorithm'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: 'Infrastructure',
+            scale: null,
+            case: [
+                'Houston',
+                'Texas'
+            ],
+            motivation: [
+                'interconnected infrastructure systems'
+            ],
+            objective: [
+                'analyze joint restoration processes'
+            ]
+        },
+        methods: [
+            'random restoration strategy (rs1)',
+            'independent restoration strategy (rs2)',
+            'power first and gas second restoration strategy (rs3)',
+            'gas aimed restoration strategy (rs4)',
+            'power and gas compromised restoration strategy (rs5)'
+        ],
+        results: [
+            'limited resources: rs1 least resilient',
+            'limited resources: rs2 and rs3 most resilient for power systems',
+            'limited resources: rs4 most resilient for gas systems'
+        ]
+    },{
+        details: {
+            journal: 'Structure and Infrastructure Engineering',
+            year: 2009,
+            title: 'Statistical Analysis of Coastal Bridge Vulnerability Based on Empirical Evidence from Hurricane Katrina',
+            authors: [
+                'Padgett',
+                'Spiller',
+                'Arnold'
+            ],
+            depts: [
+                'Civil and Environmental Engineering'
+            ],
+            keywords: [
+                'bridges',
+                'coastal',
+                'storm surge',
+                'probabilistic analysis',
+                'fragility'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: 'Highway',
+            scale: null,
+            case: [
+                'Hurricane Katrina',
+                'Gulf Coast'
+            ],
+            motivation: [],
+            objective: [
+                'identify hazard intesities which predict damage level',
+                'identify bridge characteristics which predict damage level',
+                'develop risk-based analysis of coastal bridges'
+            ]
+        },
+        methods: [
+            'statistical analysis',
+            'hazard-damage relationship',
+            'multivariate logistic regression',
+            'empirical damage probability matrices',
+            'empirical damage state exceedance matrices'
+        ],
+        results: [
+            'storm surge relates to damage level',
+            'number of spans relates to damage level',
+            'empirical fragility curves'
+        ]
+    },{
+        details: {
+            journal: 'IEEE',
+            year: 2017,
+            title: 'Power Systems Resilience Assessment: Hardening and Smart Operational Enhancement Strategies',
+            authors: [
+                'Panteli',
+                'Trakas',
+                'Mancarella',
+                'Hatziargyriou'
+            ],
+            depts: [],
+            keywords: [
+                'critical infrastructure',
+                'extreme weather',
+                'natural disasters',
+                'resilience',
+                'smart grids'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: 'Electric Grids',
+            scale: null,
+            case: [],
+            motivation: [
+                'low-probability high-impact outages',
+                'hardening',
+                'smart operational strategies'
+            ],
+            objective: [
+                'model resilience performance of power systems',
+                'quantify resilience performance of power systems'
+            ]
+        },
+        methods: [],
+        results: []
+    },{
+        details: {
+            journal: 'Integrated Environmental Assessment and Management',
+            year: 2011,
+            title: 'Lessons in Risk- Versus Resilience-Based Design and Management',
+            authors: [
+                'Park',
+                'Seager',
+                'Rao'
+            ],
+            depts: [
+                'Civil and Environmental Engineering'
+            ],
+            keywords: [
+                'Fukushima Daiichi nuclear power plant',
+                'Hurricane Katrina',
+                'Deepwater Horizon',
+                'resilience-based design',
+                'risk management',
+                'safe-fail'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [
+                'Fukushima Daiichi nuclear power plant'
+            ],
+            motivation: [
+                'complex, coupled systems',
+                'cascading effects'
+            ],
+            objective: [
+                'call for resilience-based design',
+                'call for resilience-based management paradigm'
+            ]
+        },
+        methods: [],
+        results: []
+    },{
+        details: {
+            journal: 'Cambridge Journal of Regions, Economy and Society',
+            year: 2010,
+            title: 'Resilience and Regions: Building Understanding of the Metaphor',
+            authors: [
+                'Pendall',
+                'Foster',
+                'Cowell'
+            ],
+            depts: [
+                'Urban Planning and Landscape'
+            ],
+            keywords: [
+                'regionalism',
+                'metaphors',
+                'resilience'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [],
+            motivation: [
+                'ecology',
+                'psychology',
+                'disaster studies',
+                'geography',
+                'political science',
+                'economics'
+            ],
+            objective: [
+                'review definitions of resilience',
+                'illuminate regional change',
+                'link different types of regional stresses'
+            ]
+        },
+        methods: [],
+        results: [
+            'resilience: (1) poses danger of fuzziness and (2) necessitates careful specification of space and time boundaries'
+        ]
+    },{
+        details: {
+            journal: 'PLoS ONE',
+            year: 2012,
+            title: 'Resilience in the Face of Disaster: Prevalence and Longitudinal Course of Mental Disorders Following Hurricane Ike',
+            authors: [
+                'Peitrzak',
+                'Tracy',
+                'Galea',
+                'Kilpatrick',
+                'Ruggiero',
+                'Hamblen',
+                'Southwick',
+                'Norris'
+            ],
+            depts: [
+                'Psychiatry',
+                'Behavioral Sciences'
+            ],
+            keywords: []
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [
+                'Hurricane Ike',
+                'Galveston County',
+                'Chambers County',
+                'Texas'
+            ],
+            motivation: [
+                'psychiatric disorders'
+            ],
+            objective: [
+                'determine prevalence of PTSD',
+                'determine prevalence of GAD',
+                'determine prevalence of PD',
+                'determine prevalence of depression',
+                'determine prevalence of suicidality'
+            ]
+        },
+        methods: [
+            'random, population-based survey'
+        ],
+        results: [
+            'most common: PTSD'
+        ]
+    },{
+        details: {
+            journal: 'American Journal of Public Health',
+            year: 2013,
+            title: 'Building Community Disaster Resilience: Perspectives From a Large Urban County Department of Public Health',
+            authors: [
+                'Plough',
+                'Fielding',
+                'Chandra',
+                'Williams',
+                'Eisenman',
+                'Wells',
+                'Law',
+                'Fogleman',
+                'Magana'
+            ],
+            depts: [],
+            keywords: []
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [
+                'Los Angeles County'
+            ],
+            motivation: [
+                'public health',
+                'individual preparedness',
+                'emergency preparedness',
+                'emergency response',
+                'social context'
+            ],
+            objective: [
+                'discuss community resilience framework for public health practice'
+            ]
+        },
+        methods: [
+            'community resilience theory'
+        ],
+        results: []
+    },{
+        details: {
+            journal: 'Natural Hazards Review',
+            year: 2010,
+            title: 'Engineering Perspectives on Reducing Hurricane Damage to Housing in CARICOM Carribean Islands',
+            authors: [
+                'Prevatt',
+                'Dupigny-Giroux',
+                'Masters'
+            ],
+            depts: [
+                'Civil and Environmental Engineering',
+                'Geography'
+            ],
+            keywords: [
+                'buildings',
+                'residential',
+                'hurricanes',
+                'Carribean',
+                'wind loads',
+                'structural engineering',
+                'risk factors'
+            ]
+        },
+        topic: {
+            hazard: 'Hurricanes',
+            system: 'Buildings',
+            scale: null,
+            case: [],
+            motivation: [
+                'residential building stock',
+                'societal and socioeconomic vulnerability',
+                'housing market'
+            ],
+            objective: []
+        },
+        methods: [],
+        results: []
+    },{
+        details: {
+            journal: 'IEEE',
+            year: 2009,
+            title: 'Methodology for Assessing the Resilience of Networked Infrastructure',
+            authors: [
+                'Reed',
+                'Kapur',
+                'Christie'
+            ],
+            depts: [
+                'Civil and Environmental Engineering',
+                'Industrial and Systems Engineering',
+                'Electrical and Computer Engineering'
+            ],
+            keywords: [
+                'infrastructure',
+                'networks',
+                'power system restoration',
+                'resilience',
+                'systems engineering'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [
+                'Hurricane Katrina'
+            ],
+            motivation: [
+                'urban infrastructure'
+            ],
+            objective: [
+                'relate power delivery systems to post-event infrastructure recovery'
+            ]
+        },
+        methods: [
+            'resilience measures',
+            'interdependency measures',
+            'power delivery data',
+            'telecommunications data'
+        ],
+        results: []
+    },{
+        details: {
+            journal: 'Journal of Energy Engineering',
+            year: 2010,
+            title: 'Energy Supply Systems Performance for Hurricane Katrina',
+            authors: [
+                'Reed',
+                'Powell',
+                'Westerman'
+            ],
+            depts: [
+                'Civil and Environmental Engineering',
+                'Oceanography'
+            ],
+            keywords: [
+                'electric power',
+                'disaster recovery',
+                'hurricanes',
+                'restoration'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: 'Electric Grids',
+            scale: null,
+            case: [
+                'Hurricane Katrina'
+            ],
+            motivation: [],
+            objective: []
+        },
+        methods: [
+            'power outage data'
+        ],
+        results: [
+            'weather parameters: (1) windspeed, (2) rainfall and (3) storm surge',
+            'hurricane loadings affected by rainfall and storm surge as well as windspeed'
+        ]
+    },{
+        details: {
+            journal: 'Reliability Engineering and System Safety',
+            year: 2014,
+            title: 'Scenario-Based Resilience Assessment Framework for Critical Infrastructure Systems: Case Study for Seismis Resilience of Seaports',
+            authors: [
+                'Shafieezadeh',
+                'Burden'
+            ],
+            depts: [
+                'Civil and Environmental Engineering'
+            ],
+            keywords: [
+                'resilience assessment',
+                'seaport infrastructure systems',
+                'fragility analysis',
+                'earthquakes'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: 'Seaports',
+            scale: null,
+            case: [],
+            motivation: [],
+            objective: []
+        },
+        methods: [
+            'correlation of earthquake intensity measures',
+            'fragility assessment of structural components',
+            'estimation of repair requirements',
+            'estimation of repair process',
+            'estimation of service demands'
+        ],
+        results: [
+            'probabilistic framework'
+        ]
+    },{
+        details: {
+            journal: 'IEEE',
+            year: 2015,
+            title: 'A Resilience Assessment Framework for Critical Infrastructure Systems',
+            authors: [
+                'Shen',
+                'Tang'
+            ],
+            depts: [
+                'Industrial and Systems Engineering'
+            ],
+            keywords: [
+                'resilience',
+                'absorptive capacity',
+                'adaptive capacity',
+                'restorative capacity',
+                'randomness'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: 'Infrastructure',
+            scale: null,
+            case: [],
+            motivation: [
+                'critical infrastructure'
+            ],
+            objective: [
+                'quantify resilience',
+                'formulate relationship between resilience and severity',
+                'forumalte relationship between resilience and recovery time'
+            ]
+        },
+        methods: [
+            'intrinsic system capacities',
+            'extrinsic random shock process'
+        ],
+        results: [
+            'recovery function'
+        ]
+    },{
+        details: {
+            journal: 'Natural Hazards',
+            year: 2013,
+            title: 'Building with Nature: In Search of Resilient Storm Surge Protection Strategies',
+            authors: [
+                'Slobbe',
+                'Vriend',
+                'Aarninkhof',
+                'Lulofs',
+                'Vries',
+                'Dircke'
+            ],
+            depts: [
+                'Management',
+                'Applied Sciences'
+            ],
+            keywords: [
+                'storm surge protection',
+                'coastal maintenance',
+                'building with nature',
+                'ecosystem services',
+                'adaptive management',
+                'sea level rise'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [
+                'Netherlands'
+            ],
+            motivation: [
+                'sea level rise',
+                'storm surge induced floods',
+                'Building with Nature',
+                'food safety',
+                'ecological values',
+                'socioeconomic functions'
+            ],
+            objective: [
+                'evaluate coastal protection strategies'
+            ]
+        },
+        methods: [],
+        results: []
+    },{
+        details: {
+            journal: 'Ethnicity and Disease',
+            year: 2013,
+            title: 'Building Community Resilience Through Mental Health Infrastructure and Training in Post-Katrina New Orleans',
+            authors: [
+                'Springgate',
+                'Wennerstrom',
+                'Meyers',
+                'Allen',
+                'Vannoy',
+                'Bentham',
+                'Wells'
+            ],
+            depts: [
+                'Medicine',
+                'Public Health',
+                'Psychiatry',
+                'Behavioral Sciences'
+            ],
+            keywords: [
+                'community-based participatory research',
+                'collaborative care',
+                'disasters',
+                'mental health'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [
+                'Hurricane Katrina',
+                'New Orleans'
+            ],
+            motivation: [],
+            objective: [
+                'develop mental health services',
+                'build capacity within a disparities-focused, community-academic participatory partnership framework'
+            ]
+        },
+        methods: [
+            'disaster recovery model',
+            'services delivery',
+            'training delivery',
+            'satisfaction and feedback',
+            'partnered development of products'
+        ],
+        results: []
+    },{
+        details: {
+            journal: 'Journal of Extension',
+            year: 2012,
+            title: 'Increasing Risk Awareness: The Coastal Community Resilience Index',
+            authors: [
+                'Thompson',
+                'Sempier',
+                'Swann'
+            ],
+            depts: [],
+            keywords: []
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [],
+            motivation: [
+                'population growth'
+            ],
+            objective: [
+                'aid decision-making'
+            ]
+        },
+        methods: [],
+        results: [
+            'Coastal Community Resilience Index'
+        ]
+    },{
+        details: {
+            journal: 'International Journal of Disaster Risk Science',
+            year: 2013,
+            title: 'Resilience Quantification and Its Application to a Residential Building Subject to Hurricane Winds',
+            authors: [
+                'Tokgoz',
+                'Gheorghe'
+            ],
+            depts: [
+                'Engineering Management',
+                'Industrial and Systems Engineering'
+            ],
+            keywords: [
+                'building resilience',
+                'HAZUS',
+                'hurricanes',
+                'probabilistic resilience'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [],
+            motivation: [
+                'pre-event resilience',
+                'post-event resilience'
+            ],
+            objective: [
+                'evaluate resilience performance indicators'
+            ]
+        },
+        methods: [
+            'structural loss ratios',
+            'conditional probabilities of exceeding damage states',
+            'estimated recovery times',
+            'actual recovery times',
+            'windspeed probabilities'
+        ],
+        results: [
+            'pre-event resilience: (1) preparedness and (2) mitigation',
+            'post-event resilience: (1) response and (2) recovery'
+        ]
+    },{
+        details: {
+            journal: 'Lincoln Planning Review',
+            year: 2011,
+            title: 'Community, Resilience and Recovery: Building or Burning Bridges?',
+            authors: [
+                'Vallance'
+            ],
+            depts: [],
+            keywords: []
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [],
+            motivation: [],
+            objective: []
+        },
+        methods: [],
+        results: []   
+    },{
+        details: {
+            journal: 'Process Safety Progress',
+            year: 2011,
+            title: 'A Resilience Assessment Framework for Infrastructure and Economic Systems: Quantitative and Qualitative Resilience Analysis of Petrochemical Supply Chains to a Hurricane',
+            authors: [
+                'Vugrin',
+                'Warren',
+                'Ehlen'
+            ],
+            depts: [],
+            keywords: [
+                'resilience',
+                'petrochemical supply chain',
+                'hurricanes',
+                'infrastructure protection',
+                'disruptions',
+                'critical infrastructure',
+                'key resource'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: 'Infrastructure',
+            scale: null,
+            case: [],
+            motivation: [
+                'infrastructure',
+                'economic systems'
+            ],
+            objective: []
+        },
+        methods: [],
+        results: [
+            'comprehensive resilience assessment framework',
+            'qualitative analysis framework'
+        ]
+    },{
+        details: {
+            journal: 'PLoS ONE',
+            year: 2014,
+            title: 'Quantifying Human Mobility Perturbation and Resilience in Hurricane Sandy',
+            authors: [
+                'Wang',
+                'Taylor'
+            ],
+            depts: [
+                'Civil and Environmental Engineering'
+            ],
+            keywords: []
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [
+                'Hurricane Sandy',
+                'New York City'
+            ],
+            motivation: [
+                'human mobility',
+                'lack of empirical data',
+                'effective evacuation',
+                'emergency response planning'
+            ],
+            objective: [
+                'understand nuances of human mobility',
+                'aid decision making'
+            ]
+        },
+        methods: [
+            'trip distance distribution',
+            'radius of gyration of movements',
+            'individuals visited locations',
+            'power-law distributions'
+        ],
+        results: [
+            'human mobility data from steady states can predict perturbation states'
+        ]
+    },{
+        details: {
+            journal: 'Structural Safety',
+            year: 2017,
+            title: 'De-aggregationg of Community Resilience Goals to Obtain Minimum Performance Objectives for Buildings Under Tornado Hazards',
+            authors: [
+                'Wang, Y.',
+                'Wang, N.',
+                'Lin',
+                'Ellingwood',
+                'Mahmoud',
+                'Maloney'
+            ],
+            depts: [
+                'Civil and Environmental Engineering'
+            ],
+            keywords: [
+                'community planning',
+                'resilience',
+                'risk de-aggregation',
+                'performance-based engineering',
+                'multi-objective optimization',
+                'particle swarm optimization',
+                'tornado hazards'
+            ]
+        },
+        topic: {
+            hazard: 'Tornadoes',
+            system: null,
+            scale: null,
+            case: [],
+            motivation: [
+                'performance-based engineering',
+                'building clusters',
+                'civil infrastructure systems'
+            ],
+            objective: [
+                'relate community resilience goals and minimum performance criteria of individual buildings',
+                'aid decision making'
+            ]
+        },
+        methods: [
+            'inverse multi-objective optimization'
+        ],
+        results: []
+    },{
+        details: {
+            journal: 'IEEE',
+            year: 2013,
+            title: 'Dynamic Modeling and Resilience for Power Distribution',
+            authors: [
+                'Wei',
+                'Ji',
+                'Galvan',
+                'Couvillon',
+                'Orellana'
+            ],
+            depts: [
+                'Electrical and Computer Engineering'
+            ],
+            keywords: []
+        },
+        topic: {
+            hazard: null,
+            system: 'Electric Grid',
+            scale: null,
+            case: [
+                'Hurricane Ike'
+            ],
+            motivation: [],
+            objective: [
+                'develop analytical formulation for large-scale failure and recovery of power distribution'
+            ]
+        },
+        methods: [
+            'spatial temporal modeling',
+            'correlated failures and recoveries',
+            'types of components',
+            'resilience metric'
+        ],
+        results: []
+    },{
+        details: {
+            journal: 'American Behavioral Scientist',
+            year: 2015,
+            title: 'A Practical Approach to Building Resilience in Americas Communities',
+            authors: [
+                'White',
+                'Edwards',
+                'Farrar',
+                'Plodinec'
+            ],
+            depts: [],
+            keywords: [
+                'community resilience',
+                'disaster',
+                'recovery'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [],
+            motivation: [],
+            objective: [
+                'develop web-enabled system',
+                'discuss community development work',
+                'discuss collaborative development work'
+            ]
+        },
+        methods: [
+            'case studies'
+        ],
+        results: [
+            'system components: (1) tools, (2) resources and (3) resilience knowledge'
+        ]
+    },{
+        details: {
+            journal: 'Housing Policy Debate',
+            year: 2012,
+            title: 'Mapping Social Vulnerability to Enhance Housing and Neighborhood Resilience',
+            authors: [
+                'Zandt',
+                'Peacock',
+                'Henry',
+                'Grover',
+                'Highfield',
+                'Brody'
+            ],
+            depts: [
+                'Urban Planning and Landscape',
+                'Marine Studies'
+            ],
+            keywords: [
+                'low-income housing',
+                'demographics',
+                'minorities',
+                'location'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [
+                'Hurricane Ike',
+                'Galveston',
+                'Texas'
+            ],
+            motivation: [
+                'coastal communities',
+                'emergency management',
+                'hazard mitigation',
+                'disaster recovery planning',
+                'loss reduction'
+            ],
+            objective: [
+                'map social vulnerability'
+            ]
+        },
+        methods: [],
+        results: [
+            'vulnerable neighborhoods: (1) later evacuation, (2) greater degree of damage sustained, (3) fewer private outcomes and public resources for recovery and (4) slower and lower volumes of repair and rebuilding'
+        ]
+    },{
+        details: {
+            journal: 'Journal of Architectural Engineering',
+            year: 2015,
+            title: 'Resilient Built Environment: New Framework for Assessing the Residential Construction Market',
+            authors: [
+                'Zhao',
+                'McCoy',
+                'Smoke'
+            ],
+            depts: [
+                'Civil and Environmental Engineering'
+            ],
+            keywords: [
+                'resilience',
+                'built environment',
+                'residential construction',
+                'housing',
+                'building codes',
+                'GIS'
+            ]
+        },
+        topic: {
+            hazard: null,
+            system: null,
+            scale: null,
+            case: [],
+            motivation: [
+                'residential construction market'
+            ],
+            objective: [
+                'focus on residential construction',
+                'describe resilience performance',
+                'assess resilience performance'
+            ]
+        },
+        methods: [],
+        results: [
+            'resilient built environment framework'
         ]
     }]
 };
