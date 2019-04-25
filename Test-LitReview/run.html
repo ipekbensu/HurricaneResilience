@@ -9,25 +9,26 @@
 <body>
     <h1>Lit-erally.</h1>
 
-    <h2>Top Journals.</h2>
-    <!-- <p>Some of the top journals publishing on the topic.</p> -->
+    <h2>Top 10 Journals.</h2>
     <p id="topJournals">Edit.</p>
 
-    <h2>Top Depts.</h2>
-    <!-- <p>Some of the top depts working on the topic.</p> -->
+    <h2>Top 10 Depts.</h2>
+    <!-- add onto -->
+    <p id="aveDepts">Ave # of depts on papers: </p>
     <p id="topDepts">Edit.</p>
 
-    <h2>Top Keywords.</h2>
-    <!-- <p>Some of the top keywords being used.</p> -->
+    <h2>Top 10 Keywords.</h2>
+    <!-- add onto -->
+    <p id="aveKeywords">Ave # of keywords on papers: </p>
     <p id="topKeywords">Edit.</p>
 
     <h1>Over the Years.</h1>
     <p>Select.</p>
     <select id="dropdown" onChange="viewYears()">
         <option>Paper Volume</option>
-        <option>Top Journals</option>
-        <option>Top Depts</option>
-        <option>Top Keywords</option>
+        <option>Top 10 Journals</option>
+        <option>Top 10 Depts</option>
+        <option>Top 10 Keywords</option>
     </select>
     <p id="years">Edit.</p>
 
@@ -36,16 +37,27 @@
     <h2>Team Depts.</h2>
     <p>Check.</p>
     <input id="CEE" type="checkbox" onChange="check()">Civil and Environmental Engineering</input><br>
+    <input id="ISE" type="checkbox" onChange="check()">Industrial and Systems Engineering</input><br>
     <input id="ES" type="checkbox" onChange="check()">Environmental Studies</input><br>
     <input id="G" type="checkbox" onChange="check()">Geography</input><br>
+    <input id="ECS" type="checkbox" onChange="check()">Electrical and Computer Engineering</input><br>
+    <input id="UPL" type="checkbox" onChange="check()">Urban Planning and Landscape</input><br>
+    <input id="A" type="checkbox" onChange="check()">Architecture</input><br>
+    <input id="PH" type="checkbox" onChange="check()">Public Health</input><br>
+    <input id="EAPS" type="checkbox" onChange="check()">Earth, Atmospheric and Planetary Sciences</input><br>
+    <input id="EM" type="checkbox" onChange="check()">Engineering Management</input><br>
 
     <h2>Submit:</h2>
     <p id="suggestJournal">Select depts.</p>
 
     <h2>Collaborate:</h2>
+    <!-- add onto -->
+    <p id="suggestAveDepts">Ave # of depts on papers: </p>
     <p id="suggestDepts">Select depts.</p>
 
     <h2>Don't Forget:</h2>
+    <!-- add onto -->
+    <p id="suggestAveKeywords">Ave # of keywords on papers: </p>
     <p id="suggestKeywords">Select depts.</p>
 </body>
 <script>
@@ -74,6 +86,8 @@
     document.getElementById('topJournals').innerHTML = textify(topJournals.data);
     document.getElementById('topDepts').innerHTML = textify(topDepts.data);
     document.getElementById('topKeywords').innerHTML = textify(topKeywords.data);
+    document.getElementById('aveDepts').innerHTML += aveDepts.data;
+    document.getElementById('aveKeywords').innerHTML += aveKeywords.data;
 
     document.getElementById('years').innerHTML = textify_(years.data);
     function viewYears(){
@@ -82,13 +96,13 @@
         if(res == 'Paper Volume'){
             document.getElementById('years').innerHTML = textify_(years.data);
         }
-        if(res == 'Top Journals'){
+        if(res == 'Top 10 Journals'){
             document.getElementById('years').innerHTML = textify(yearsJournals.data);
         }
-        if(res == 'Top Depts'){
+        if(res == 'Top 10 Depts'){
             document.getElementById('years').innerHTML = textify(yearsDepts.data);
         }
-        if(res == 'Top Keywords'){
+        if(res == 'Top 10 Keywords'){
             document.getElementById('years').innerHTML = textify(yearsKeywords.data);
         }
     };
@@ -100,11 +114,32 @@
         if(document.getElementById('CEE').checked == true){
             checked.push('Civil and Environmental Engineering');
         }
+        if(document.getElementById('ISE').checked == true){
+            checked.push('Industrial and Systems Engineering');
+        }
         if(document.getElementById('ES').checked == true){
             checked.push('Environmental Studies');
         }
         if(document.getElementById('G').checked == true){
             checked.push('Geography');
+        }
+        if(document.getElementById('ECS').checked == true){
+            checked.push('Electrical and Computer Engineering');
+        }
+        if(document.getElementById('UPL').checked == true){
+            checked.push('Urban Planning and Landscape');
+        }
+        if(document.getElementById('A').checked == true){
+            checked.push('Architecture');
+        }
+        if(document.getElementById('PH').checked == true){
+            checked.push('Public Health');
+        }
+        if(document.getElementById('EAPS').checked == true){
+            checked.push('Earth, Atmospheric and Planetary Sciences');
+        }
+        if(document.getElementById('EM').checked == true){
+            checked.push('Engineering Management');
         }
         if(checked.length != 0){
             filtered = lit.data;
@@ -145,6 +180,17 @@
             years.data = functions.detail(filtered, 'year');
             depts.data = functions.detail_(filtered, 'depts');
             keywords.data = functions.detail_(filtered, 'keywords');
+            var aveDepts = {
+                metadata: 'average #',
+                data: null
+            };
+
+            var aveKeywords = {
+                metadata: 'average #',
+                data: null
+            };
+            aveDepts.data = functions.ave(filtered, 'depts');
+            aveKeywords.data = functions.ave(filtered, 'keywords');
             var topJournals = {
                 metadata: [
                     'journal', 'frequency'
@@ -164,16 +210,20 @@
                 data: []
             };
             topJournals.data = functions.top(journals.data, 'journal', 1);
-            topDepts.data = functions.top(depts.data, 'dept', 3);
-            topKeywords.data = functions.top(keywords.data, 'keywords', 5);
+            topDepts.data = functions.top(depts.data, 'dept', aveDepts.data);
+            topKeywords.data = functions.top(keywords.data, 'keywords', aveKeywords.data);
             document.getElementById('suggestJournal').innerHTML = textify(topJournals.data);
             document.getElementById('suggestDepts').innerHTML = textify(topDepts.data);
             document.getElementById('suggestKeywords').innerHTML = textify(topKeywords.data);
+            document.getElementById('suggestAveDepts').innerHTML = 'Ave # of depts on papers: ' + aveDepts.data;
+            document.getElementById('suggestAveKeywords').innerHTML = 'Ave # of keywords on papers: ' + aveKeywords.data;
         }
         else{
             document.getElementById('suggestJournal').innerHTML = 'Select depts.';
             document.getElementById('suggestDepts').innerHTML = 'Select depts.';
             document.getElementById('suggestKeywords').innerHTML = 'Select depts.';
+            document.getElementById('suggestAveDepts').innerHTML = 'Ave # of depts on papers: ';
+            document.getElementById('suggestAveKeywords').innerHTML = 'Ave # of keywords on papers: ';
         }
     };
 </script>
