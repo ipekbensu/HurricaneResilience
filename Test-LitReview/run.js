@@ -2,10 +2,6 @@
 // var lit = require('./lit.js');
 // var functions = require('./functions.js');
 
-// lit.data = lit.data.filter(function(paper){
-//     return paper.details.depts.includes('Civil and Environmental Engineering');
-// });
-
 var journals = {
     metadata: [
         'journal', 'frequency'
@@ -61,9 +57,9 @@ var topKeywords = {
     data: []
 };
 
-topJournals.data = functions.top(journals.data, 'journal', 3);
-topDepts.data = functions.top(depts.data, 'dept', 3);
-topKeywords.data = functions.top(keywords.data, 'keywords', 5);
+topJournals.data = functions.top(journals.data, 'journal', 10);
+topDepts.data = functions.top(depts.data, 'dept', 10);
+topKeywords.data = functions.top(keywords.data, 'keywords', 10);
 
 // test
 // console.log(topJournals);
@@ -97,3 +93,20 @@ yearsKeywords.data = functions.overYears_(topKeywords.data, lit.data, 'keywords'
 // console.log(yearsJournals);
 // console.log(yearsDepts);
 // console.log(yearsKeywords);
+
+var aveDepts = {
+    metadata: 'average #',
+    data: null
+};
+
+var aveKeywords = {
+    metadata: 'average #',
+    data: null
+};
+
+aveDepts.data = functions.ave(lit.data, 'depts');
+aveKeywords.data = functions.ave(lit.data, 'keywords');
+
+// test
+// console.log(aveDepts);
+// console.log(aveKeywords);
