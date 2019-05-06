@@ -89,24 +89,35 @@
     function markInit(){
         coordFL.data.forEach(function(county, countyIndex){
             var info = null;
-            var color = null;
+            var icon = null;
             var scale = null;
+            var color = null;
             if(sedbinFL.data.age.inj[countyIndex][1]>0){
                 info = Math.abs(sedbinFL.data.age.inj[countyIndex][1]) + '% increase to baseline';
+                icon = google.maps.SymbolPath.FORWARD_CLOSED_ARROW;
                 scale = 1 + Math.abs(sedbinFL.data.age.inj[countyIndex][1])/20;
                 color = '#FF0000';
             }
             else{
-                info = Math.abs(sedbinFL.data.age.inj[countyIndex][1]) + '% decrease to baseline';
-                scale = 1 + Math.abs(sedbinFL.data.age.inj[countyIndex][1])/20;
-                color = '#006400';
+                if(sedbinFL.data.age.inj[countyIndex][1]>0){
+                    info = Math.abs(sedbinFL.data.age.inj[countyIndex][1]) + '% decrease to baseline';
+                    icon = google.maps.SymbolPath.BACKWARD_CLOSED_ARROW;
+                    scale = 1 + Math.abs(sedbinFL.data.age.inj[countyIndex][1])/20;
+                    color = '#006400';
+                }
+                else{
+                    info = null;
+                    icon = null;
+                    scale = null;
+                    color = null;
+                }
             }
             var marker = new google.maps.Marker({
                 title: county[0] + '\n' + info,
                 map: map,
                 position: new google.maps.LatLng(county[2], county[3]),
                 icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
+                    path: icon,
                     scale: scale,
                     strokeColor: color,
                     strokeOpacity: 0.8,
@@ -168,21 +179,25 @@
         }
         coordFL.data.forEach(function(county, countyIndex){
             var info = null;
+            var icon = null;
             var scale = null;
             var color = null;
             if(sedbinFL.data[fact][morb][countyIndex][1]>0){
                 info = Math.abs(sedbinFL.data[fact][morb][countyIndex][1]) + '% increase to baseline';
+                icon = google.maps.SymbolPath.FORWARD_CLOSED_ARROW;
                 scale = 1 + Math.abs(sedbinFL.data[fact][morb][countyIndex][1])/20;
                 color = '#FF0000';
             }
             else{
                 if(sedbinFL.data[fact][morb][countyIndex][1]>0){
                     info = Math.abs(sedbinFL.data[fact][morb][countyIndex][1]) + '% decrease to baseline';
+                    icon = google.maps.SymbolPath.BACKWARD_CLOSED_ARROW;
                     scale = 1 + Math.abs(sedbinFL.data[fact][morb][countyIndex][1])/20;
                     color = '#006400';
                 }
                 else{
                     info = null;
+                    icon = null;
                     scale = null;
                     color = null;
                 }
