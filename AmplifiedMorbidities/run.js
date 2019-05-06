@@ -2,6 +2,7 @@
 // var functions = require('./functions.js');
 // var csv = require('./all-geocodes-v2016.js'); // used on line 49
 // var csv2 = require('./DEC_10_DP_DPDP1.js'); // used on line 97
+// var csv3 = require('./dataBuilt.js);
 
 var states = {
     metadata: [
@@ -30,9 +31,6 @@ var states = {
         ['Virginia', 'VA', '51']
     ]
 };
-// test
-// console.log(states);
-// console.log(states.data.length);
 
 var counties = {
     metadata: {
@@ -43,16 +41,11 @@ var counties = {
     },
     data: {}
 };
-
 states.data.forEach(function(item){
-    // counties.data[item[1]] = [];
     counties.data[item[1]] = functions.readCounties(item[2], csv);
 });
-// test
-// console.log(counties);
-// console.log(counties.data.FL);
-// console.log(counties.data.FL.length);
 
+// read SED info
 var sedFL = {
     metadata: {
         County: {
@@ -92,15 +85,11 @@ var sedFL = {
     },
     data: {}
 };
-
 counties.data.FL.forEach(function(item){
-    // sedFL.data[item[1]] = {};
-    sedFL.data[item[1]] = functions.readSED(item[1], csv2);
+    sedFL.data[item[1]] = functions.readSED(item[1], csv2, csv3);
 });
-// test
-// console.log(sedFL);
-// console.log(sedFL.data['12103']);
 
+// apply SED factors
 var sedfactFL = {
     metadata: {
         County: {
@@ -114,14 +103,9 @@ var sedfactFL = {
     },
     data: {}
 };
-
 counties.data.FL.forEach(function(item){
-    // sedfactFL.data[item[1]] = [];
     sedfactFL.data[item[1]] = functions.applySED(item[1], sedFL);
 });
-// test
-// console.log(sedfactFL);
-// console.log(sedfactFL.data['12103']);
 
 var sedfactFL_ = {
     metadata: {
@@ -256,16 +240,11 @@ var sedbinFL = {
         }
     }
 };
-
 counties.data.FL.forEach(function(item){
     functions.mapSED(item[1], sedfactFL, sedfactFL_.data, sedbinFL.data);
 });
-// test
-// console.log(sedfactFL_);
-// console.log(sedfactFL_.data['age']);
-// console.log(sedbinFL);
-// console.log(sedbinFL.data['age']);
 
+// assign coordinates
 var coordFL = {
     metadata: [
         'County',
@@ -275,9 +254,6 @@ var coordFL = {
     ],
     data: []
 };
-
 counties.data.FL.forEach(function(item, index){
     functions.matchCoordFL(item, index, coordFL.data);
 });
-// test
-// console.log(coordFL);

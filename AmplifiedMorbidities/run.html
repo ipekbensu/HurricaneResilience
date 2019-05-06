@@ -3,12 +3,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <style>
         * {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             box-sizing: border-box;
         }
         .column{
             float: left;
             width: 50%;
-            padding: 0px;
         }
         .row:after{
             content: "";
@@ -17,12 +17,9 @@
         }
     </style>
     <!-- data -->
-    <!-- ~~~~~~~~~~~~~~~~~~~~
-    note to self:
-    add data
-    ~~~~~~~~~~~~~~~~~~~~ -->
     <script src="./all-geocodes-v2016.js"></script>
     <script src="./DEC_10_DP_DPDP1.js"></script>
+    <script src="./dataBuilt.js"></script>
     <!-- functions -->
     <script src="./functions.js"></script>
     <script src="./run.js"></script>
@@ -30,106 +27,132 @@
     <script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyARxs_0QWBQzZ-7tnFIkcz6Tzh5Fr1I0xg"></script>
 </head>
 <body>
-    <!-- mapping -->
-    <h1>Loss Amplification</h1>
-    <!-- <div class="row">
-        <div class="column"> -->
-            <h2>User selects SED factor.</h2>
-            <select id="dropdown1" onchange="markersEdit()">
-                <option value="a">Age-----------------------------</option>
-                <option value="e">Ethnicity/Race</option>
-                <option value="f">Family Structure</option>
-                <option value="g">Gender</option>
-                <option value="s">Socioeconomic Status</option>
-                <option value="b">Built Environment</option>
-            </select>
-        <!-- </div>
-        <div class="column"> -->
-            <h2>User selects morbidity.</h2>
-            <select id="dropdown2" onchange="markersEdit()">
-                <option value="i">Injuries------------------------</opton>
-                <option value="f">Fatalities</option>
-                <option value="p">Cases of PTSD</option>
-            </select>
-        <!-- </div>
-    </div> -->
+    <h2 style="text-align:center;">Hurricane Resilience</h2>
+    <p style="text-align:center;">Mapping vulnerability and potential loss amplification</p>
+    <br>
+    <br>
+    <h1 style="text-align:center;">Loss Amplification</h1>
     <div class="row">
-        <div class="column">
-            <h1>Map:</h1>
-            <p>Displays 10-%ile loss amplifications.</p>
-            <div id="map" style="width: 600px; height: 600px"></div>
+        <div class="column" style="padding-left:50px;">
+            <h2>Map:</h2>
+            <p>10-%ile loss amplifications.</p>
+            <div id="map" style="width: 550px; height: 600px"></div>
         </div>
-        <div class="column">
-            <h1>Text:</h1>
-            <p>Explains effect of chosen SED factor on chosen morbidity.</p>
-            <h1>Reference:</h1>
-            <p>
-                Sutley, 2016<br>
-                US Census Bureau
-            </p>
+        <div class="column" style="padding-right:50px;">
+            <div class="row">
+                <div class="column">
+                    <h2>Select SED factor.</h2>
+                    <select id="dropdown1" onchange="markEdit()">
+                        <option value="a">Age-----------------------------</option>
+                        <option value="e">Ethnicity/Race</option>
+                        <option value="f">Family Structure</option>
+                        <option value="g">Gender</option>
+                        <!-- <option value="s">Socioeconomic Status</option> -->
+                        <option value="b">Built Environment</option>
+                    </select>
+                </div>
+                <div class="column">
+                    <h2>Select morbidity.</h2>
+                    <select id="dropdown2" onchange="markEdit()">
+                        <option value="i">Injuries------------------------</opton>
+                        <option value="f">Fatalities</option>
+                        <option value="p">Cases of PTSD</option>
+                    </select>
+                </div>
+            </div>
+            <h2 id="method">Method:</h2>
+            <p id="fmet">Age can act to amplify or lessen morbidities. Age groups are defined as: (1) children (0-9 years old), (2) adolescents (10-18 years old), (3) young adults (19-29 years old), (4) middle-aged adults (30-45 years old), (5) older adults (46-64 years old) and (6) elders (65+ years old).</p>
+            <p id="mmet">Adolescents, young adults, older adults and especially elders are more prone to injuries and fatalities. Furthermore, children, adolescents and elsers are prone to PTSD.</p>
+            <h2>Reference:</h2>
+            <h3>Method:</h3>
+            <p>Sutley, 2017. "Community-Level Framework for Seismic Resilience."</p>
+            <h3>Data:</h3>
+            <p>US Census Bureau, 2016. "Geocodes."<br>
+            US Census Bureau, 2010. "American Community Survey."</p>
         </div>
     </div>
 </body>
 <script>
-    var map = [];
-    var markers = [];
+    var map = []; // each SED factor, each morbidity
+    var mark = []; // affected by dropdown
 
     function mapInit(){
         var options = {
             title: 'Florida',
-            center: new google.maps.LatLng(27.6648, -81.5158),
-            zoom: 6,
+            center: new google.maps.LatLng(27.8899385, -83.4083427),
+            zoom: 6.54,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById('map'), options);
     };
 
-    function markersInit(){
+    function markInit(){
         coordFL.data.forEach(function(county, countyIndex){
+            var info = null;
+            var color = null;
+            var scale = null;
+            if(sedbinFL.data.age.inj[countyIndex][1]>0){
+                info = Math.abs(sedbinFL.data.age.inj[countyIndex][1]) + '% increase to baseline';
+                scale = 1 + Math.abs(sedbinFL.data.age.inj[countyIndex][1])/20;
+                color = '#FF0000';
+            }
+            else{
+                info = Math.abs(sedbinFL.data.age.inj[countyIndex][1]) + '% decrease to baseline';
+                scale = 1 + Math.abs(sedbinFL.data.age.inj[countyIndex][1])/20;
+                color = '#006400';
+            }
             var marker = new google.maps.Marker({
-                title: county[0] + '\n' + sedbinFL.data.age.inj[countyIndex][1] + '% increase to baseline',
+                title: county[0] + '\n' + info,
                 map: map,
                 position: new google.maps.LatLng(county[2], county[3]),
-                // ~~~~~~~~~~~~~~~~~~~~
-                // note to self:
-                // edit icons
-                // ~~~~~~~~~~~~~~~~~~~~
                 icon: {
                     path: google.maps.SymbolPath.CIRCLE,
-                    scale: 1 + Number(sedbinFL.data.age.inj[countyIndex][1])/20,
-                    strokeColor: '#FF0000',
+                    scale: scale,
+                    strokeColor: color,
                     strokeOpacity: 0.8,
                     strokeWeight: 2,
-                    fillColor: '#FF0000',
+                    fillColor: color,
                     fillOpacity: 0.35,
                 }
             });
-            markers.push(marker);
+            mark.push(marker);
         });
     };
 
-    function markersEdit(){
-        markersClear();
+    function markEdit(){ // called by dropdown
+        markClear();
         var selected1 = document.getElementById('dropdown1');
         var res1 = selected1.options[selected1.selectedIndex].text;
         var fact = null;
         if(res1 == 'Age-----------------------------'){
             fact = 'age';
+            document.getElementById('fmet').innerHTML = 'Age can act to amplify or lessen morbidities. Age groups are defined as: (1) children (0-9 years old), (2) adolescents (10-18 years old), (3) young adults (19-29 years old), (4) middle-aged adults (30-45 years old), (5) older adults (46-64 years old) and (6) elders (>65 years old).';
+            document.getElementById('mmet').innerHTML = 'Adolescents, young adults, older adults and especially elders are more prone to injuries and fatalities. Furthermore, children, adolescents and elsers are prone to PTSD.';
         }
         if(res1 == 'Ethnicity/Race'){
             fact = 'eth';
+            document.getElementById('fmet').innerHTML = 'Ethnicity/race can act to amplify PTSD. Ethnicity/race groups are defined as: (1) white, non-Hispanic and (2) non-white, non-Hispanic.';
+            document.getElementById('mmet').innerHTML = 'Non-white, non-Hispanic individuals are more prone to PTSD.';
         }
         if(res1 == 'Family Structure'){
             fact = 'fam';
+            document.getElementById('fmet').innerHTML = 'Family structure can act to amplify PTSD. Family structure groups are defined as: (1) single and (2) partnered. Another factor to take into account is (3) presence of person <18 years old in household.';
+            document.getElementById('mmet').innerHTML = 'Households with single parents are significantly more prone to PTSD.';
         }
         if(res1 == 'Gender'){
             fact = 'gen';
+            document.getElementById('fmet').innerHTML = 'Gender can act to amplify morbidities. Gender groups are defined as: (1) female and (2) male.';
+            document.getElementById('mmet').innerHTML = 'Female individuals are significantly more prone to injuries, fatalities and PTSD.';
         }
         if(res1 == 'Socioeconomic Status'){
             fact = 'soc';
+            document.getElementById('fmet').innerHTML = 'Socioeconomic status can act to amplify or lessen morbidities. Socioeconomic status groups are defined as: (1) low, (2) moderate and (3) upper.';
+            document.getElementById('mmet').innerHTML = 'Households of low and moderate socioeconomic status are significantly more prone to injuries, fatalities and PTSD.';
         }
         if(res1 == 'Built Environment'){
             fact = 'bui';
+            document.getElementById('fmet').innerHTML = 'Built environment can act to amplify or lessen morbidities. Built environment groups are defined as: (1) new rural, (2) old rural, (3) new urban and (4) old urban.';
+            document.getElementById('mmet').innerHTML = 'Areas that are new urban and old urban are more prone to injuries and fatalities. Furthermore, areas that are new rural, old rural and old urban are more prone to PTSD.';
         }
         var selected2 = document.getElementById('dropdown2');
         var res2 = selected2.options[selected2.selectedIndex].text;
@@ -144,38 +167,56 @@
             morb = 'pts';
         }
         coordFL.data.forEach(function(county, countyIndex){
-            var marker = new google.maps.Marker({
-                title: county[0] + '\n' + sedbinFL.data[fact][morb][countyIndex][1] + '% increase to baseline',
-                map: map,
-                position: new google.maps.LatLng(county[2], county[3]),
-                // ~~~~~~~~~~~~~~~~~~~~
-                // note to self:
-                // edit icons
-                // ~~~~~~~~~~~~~~~~~~~~
-                icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    scale: 1 + Number(sedbinFL.data[fact][morb][countyIndex][1])/20,
-                    strokeColor: '#FF0000',
-                    strokeOpacity: 0.8,
-                    strokeWeight: 2,
-                    fillColor: '#FF0000',
-                    fillOpacity: 0.35,
+            var info = null;
+            var scale = null;
+            var color = null;
+            if(sedbinFL.data[fact][morb][countyIndex][1]>0){
+                info = Math.abs(sedbinFL.data[fact][morb][countyIndex][1]) + '% increase to baseline';
+                scale = 1 + Math.abs(sedbinFL.data[fact][morb][countyIndex][1])/20;
+                color = '#FF0000';
+            }
+            else{
+                if(sedbinFL.data[fact][morb][countyIndex][1]>0){
+                    info = Math.abs(sedbinFL.data[fact][morb][countyIndex][1]) + '% decrease to baseline';
+                    scale = 1 + Math.abs(sedbinFL.data[fact][morb][countyIndex][1])/20;
+                    color = '#006400';
                 }
-            });
-            markers.push(marker);
+                else{
+                    info = null;
+                    scale = null;
+                    color = null;
+                }
+            }
+            if(scale != null){
+                var marker = new google.maps.Marker({
+                    title: county[0] + '\n' + info,
+                    map: map,
+                    position: new google.maps.LatLng(county[2], county[3]),
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: scale,
+                        strokeColor: color,
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: color,
+                        fillOpacity: 0.35,
+                    }
+                });
+                mark.push(marker);
+            }
         });
     };
 
-    function markersClear(){
-        for(var i=0; i<markers.length; i++){
-            markers[i].setMap(null);
+    function markClear(){
+        for(var i=0; i<mark.length; i++){
+            mark[i].setMap(null);
         }
-        markers = [];
+        mark = [];
     };
 
     function viewMap(){
         google.maps.event.addDomListener(window, 'load', mapInit);
-        google.maps.event.addDomListener(window, 'load', markersInit);
+        google.maps.event.addDomListener(window, 'load', markInit);
     };
     viewMap();
 </script>

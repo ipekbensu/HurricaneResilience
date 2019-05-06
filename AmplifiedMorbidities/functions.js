@@ -13,16 +13,10 @@ functions.readCounties = function(fips, csv){
             ]);
         }
     });
-    // test
-    // return data.length;
     return data;
 };
 
-// ~~~~~~~~~~~~~~~~~~~~
-// note to self:
-// need updates
-// ~~~~~~~~~~~~~~~~~~~~
-functions.readSED = function(fips, csv){
+functions.readSED = function(fips, csv, csv3){
     // var data = {
     //     age: ['chi', 'ado', 'you', 'mid', 'old', 'eld'],
     //     eth: ['whi', 'non'],
@@ -51,17 +45,44 @@ functions.readSED = function(fips, csv){
                 Number(item[25]) + Number(item[27]) + Number(item[29]) + Number(item[31]), // 45*-64* y/o
                 Number(item[33]) + Number(item[35]) + Number(item[37]) + Number(item[39]) + Number(item[41]) // 65+
             ];
-            // data.eth = [
-            //     100*Number(item[249])/Number(item[247]),
-            //     100 - 100*Number(item[249])/Number(item[247])
-            // ];
-            // data.fam = [];
+            data.eth = [
+                Number(item[249]), // white, non-Hispanic
+                Number(item[247]) - Number(item[249]) // non-white, non-Hispanic
+            ];
+            data.fam = [
+                100*(Number(item[309]) - Number(item[311]))/Number(item[305]), // partnered, no <18 y/o
+                100*(Number(item[305]) - Number(item[309]) - Number(item[315]) - Number(item[319]))/Number(item[305]), // single, no <18 y/o
+                100*(Number(item[307]))/Number(item[305]) // with <18 y/o
+            ];
             data.gen = [
-                Number(item[105]),
-                Number(item[55])
+                Number(item[105]), // female
+                Number(item[55]) // male
             ];
             // data.soc = [];
-            // data.bui = [];
+        }
+    });
+    csv3 = csv3.split('\n');
+    csv3.forEach(function(item){
+        item = item.replace(/"/g, '');
+        item = item.replace(/�/g, '');
+        item = item.split(',');
+        if(item[1] == fips){
+            if(item[2] == 0){ // rural
+                if(item[3] == 0){ // new
+                    data.bui = [100, 0, 0, 0];
+                }
+                else{ // old
+                    data.bui = [0, 100, 0, 0];
+                }
+            }
+            else{ // urban
+                if(item[3] == 0){ // new
+                    data.bui = [0, 0, 100, 0];
+                }
+                else{ // old
+                    data.bui = [0, 0, 0, 100];
+                }
+            }
         }
     });
     return data;
@@ -126,8 +147,13 @@ functions.applySED = function(fips, sed){
 
 functions.mapSED = function(fips, sed, data, bins){
     bin = function(val){
-        var bin = 10*Math.ceil(10*(val-1));
-        return bin;
+        if(val>0){
+            var bin = 10*Math.ceil(10*(val-1));
+            return bin;
+        }
+        else{
+            return 0;
+        }
     };
     apply = function(fact){
         data[fact].inj.push([
