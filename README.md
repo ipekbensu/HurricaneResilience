@@ -1,12 +1,12 @@
 ## Vulnerability
 
-A qualitative assessment was made on Florida counties, aggregating a vulnerability score. Factors taken into account are: (1) natural risk, (2) built risk and (3) social risk, each scored individually.
+A qualitative assessment was made on Florida counties, aggregating a vulnerability score. Factors taken into account are: (1) natural hazard, (2) built hazard and (3) social hazard, each scored individually.
 
 Click [here](https://ipekbensu.github.io/HurricaneResilience/Vulnerability/run.html) to view.
 
 ### Natural Hazard
 
-A qualitative assessment was made on Florida counties, aggregating a natural risk score. Factors taken into account are: (1) wind risk, (2) windborne debris risk and (3) storm surge risk, each scored individually.
+A qualitative assessment was made on Florida counties, aggregating a natural risk score. Factors taken into account are: (1) wind, (2) windborne debris and (3) storm surge, each scored individually.
 
 Click [here](https://ipekbensu.github.io/HurricaneResilience/Vulnerability/Natural/run.html) to view.
 
