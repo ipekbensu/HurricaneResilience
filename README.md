@@ -12,7 +12,7 @@ Click [here](https://ipekbensu.github.io/HurricaneResilience/Vulnerability/Natur
 
 ### Built Hazard
 
-A qualitative assessment was made on Florida counties, aggregating a built risk score. Factors taken into account are: (1) density and (2) age of the building stock, each score individually.
+A qualitative assessment was made on Florida counties, aggregating a built risk score. Factors taken into account are: (1) density and (2) age of the building stock, each scored individually.
 
 Click [here](https://ipekbensu.github.io/HurricaneResilience/Vulnerability/Built/run.html) to view.
 
