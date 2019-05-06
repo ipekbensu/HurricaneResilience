@@ -65,9 +65,9 @@
             <p id="mmet">Adolescents, young adults, older adults and especially elders are more prone to injuries and fatalities. Furthermore, children, adolescents and elsers are prone to PTSD.</p>
             <h2>Reference:</h2>
             <h3>Method:</h3>
-            <p>Sutley, 2017. "Community-Level Framework for Seismic Resilience."</p>
+            <p id="mref">Sutley, 2017. "Community-Level Framework for Seismic Resilience."</p>
             <h3>Data:</h3>
-            <p>US Census Bureau, 2016. "Geocodes."<br>
+            <p id="dref">US Census Bureau, 2016. "Geocodes."<br>
             US Census Bureau, 2010. "American Community Survey."</p>
         </div>
     </div>
@@ -137,31 +137,43 @@
         var fact = null;
         if(res1 == 'Age-----------------------------'){
             fact = 'age';
+            document.getElementById('mref').innerHTML = 'Sutley, 2017. "Community-Level Framework for Seismic Resilience."';
+            document.getElementById('dref').innerHTML = 'US Census Bureau, 2016. "Geocodes."<br>US Census Bureau, 2010. "American Community Survey."';
             document.getElementById('fmet').innerHTML = 'Age can act to amplify or lessen morbidities. Age groups are defined as: (1) children (0-9 years old), (2) adolescents (10-18 years old), (3) young adults (19-29 years old), (4) middle-aged adults (30-45 years old), (5) older adults (46-64 years old) and (6) elders (>65 years old).';
             document.getElementById('mmet').innerHTML = 'Adolescents, young adults, older adults and especially elders are more prone to injuries and fatalities. Furthermore, children, adolescents and elsers are prone to PTSD.';
         }
         if(res1 == 'Ethnicity/Race'){
             fact = 'eth';
+            document.getElementById('mref').innerHTML = 'Sutley, 2017. "Community-Level Framework for Seismic Resilience."';
+            document.getElementById('dref').innerHTML = 'US Census Bureau, 2016. "Geocodes."<br>US Census Bureau, 2010. "American Community Survey."';
             document.getElementById('fmet').innerHTML = 'Ethnicity/race can act to amplify PTSD. Ethnicity/race groups are defined as: (1) white, non-Hispanic and (2) non-white, non-Hispanic.';
             document.getElementById('mmet').innerHTML = 'Non-white, non-Hispanic individuals are more prone to PTSD.';
         }
         if(res1 == 'Family Structure'){
             fact = 'fam';
+            document.getElementById('mref').innerHTML = 'Sutley, 2017. "Community-Level Framework for Seismic Resilience."';
+            document.getElementById('dref').innerHTML = 'US Census Bureau, 2016. "Geocodes."<br>US Census Bureau, 2010. "American Community Survey."';
             document.getElementById('fmet').innerHTML = 'Family structure can act to amplify PTSD. Family structure groups are defined as: (1) single and (2) partnered. Another factor to take into account is (3) presence of person <18 years old in household.';
             document.getElementById('mmet').innerHTML = 'Households with single parents are significantly more prone to PTSD.';
         }
         if(res1 == 'Gender'){
             fact = 'gen';
+            document.getElementById('mref').innerHTML = 'Sutley, 2017. "Community-Level Framework for Seismic Resilience."';
+            document.getElementById('dref').innerHTML = 'US Census Bureau, 2016. "Geocodes."<br>US Census Bureau, 2010. "American Community Survey."';
             document.getElementById('fmet').innerHTML = 'Gender can act to amplify morbidities. Gender groups are defined as: (1) female and (2) male.';
             document.getElementById('mmet').innerHTML = 'Female individuals are significantly more prone to injuries, fatalities and PTSD.';
         }
         if(res1 == 'Socioeconomic Status'){
             fact = 'soc';
+            document.getElementById('mref').innerHTML = 'Sutley, 2017. "Community-Level Framework for Seismic Resilience."';
+            document.getElementById('dref').innerHTML = 'US Census Bureau, 2016. "Geocodes."<br>US Census Bureau, 2010. "American Community Survey."';
             document.getElementById('fmet').innerHTML = 'Socioeconomic status can act to amplify or lessen morbidities. Socioeconomic status groups are defined as: (1) low, (2) moderate and (3) upper.';
             document.getElementById('mmet').innerHTML = 'Households of low and moderate socioeconomic status are significantly more prone to injuries, fatalities and PTSD.';
         }
         if(res1 == 'Built Environment'){
             fact = 'bui';
+            document.getElementById('mref').innerHTML = 'Sutley, 2017. "Community-Level Framework for Seismic Resilience."<br>HRSA, 2016. "List of Rural Counties."';
+            document.getElementById('dref').innerHTML = 'US Census Bureau, 2016. "Geocodes."<br><a href="https://www.cdc.gov/nchs/data_access/urban_rural.htm">CDC</a>.<br>FEMA. HAZUS Tool.';
             document.getElementById('fmet').innerHTML = 'Built environment can act to amplify or lessen morbidities. Built environment groups are defined as: (1) new rural, (2) old rural, (3) new urban and (4) old urban.';
             document.getElementById('mmet').innerHTML = 'Areas that are new urban and old urban are more prone to injuries and fatalities. Furthermore, areas that are new rural, old rural and old urban are more prone to PTSD.';
         }
