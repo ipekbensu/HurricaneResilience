@@ -18,12 +18,12 @@ Click [here](https://ipekbensu.github.io/HurricaneResilience/Vulnerability/Built
 
 ### Social Hazard
 
-A qualitative assessment was made on Florida counties, aggregating a social risk score. A proposed framework is used.
+A qualitative assessment was made on Florida counties, aggregating a social risk score. A proposed framework was used.
 
 Click [here](https://ipekbensu.github.io/HurricaneResilience/Vulnerability/Social/run.html) to view.
 
 ## Loss Amplification
 
-Potential loss amplifications were computed for Florida counties. A proposed framework is used.
+Potential loss amplifications were computed for Florida counties. A proposed framework was used.
 
 Click [here](https://ipekbensu.github.io/HurricaneResilience/AmplifiedMorbidities/run.html) to view.
